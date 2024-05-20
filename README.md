@@ -1,4 +1,5 @@
 # healthforall
+<<<<<<< HEAD
 
 A new Flutter project.
 
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+Aplicatia mobila pentru programare la medic, lucrare de licenta
+>>>>>>> 8278b460c590cb7cc3a94a26c436e7f763960008
