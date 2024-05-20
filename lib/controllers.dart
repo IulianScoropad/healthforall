@@ -14,3 +14,6 @@ final TextEditingController editHospitalNameController = TextEditingController()
 final TextEditingController editTimeController = TextEditingController();
 final TextEditingController editNumberOfPatienceController = TextEditingController();
 final TextEditingController editAboutDoctorController = TextEditingController();
+final TextEditingController editYearsExperienceController = TextEditingController();
+
+String? globalUserId;

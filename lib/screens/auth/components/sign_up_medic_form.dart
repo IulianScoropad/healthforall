@@ -110,6 +110,15 @@ class SignUpMedicFrom extends StatelessWidget {
             decoration: InputDecoration(hintText: "adress"),
           ),
           const SizedBox(height: defaultPadding),
+          TextFieldName(text: "Ani Experienta"),
+          // Same for phone number
+          TextFormField(
+            controller: editYearsExperienceController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(hintText: " "),
+            validator: RequiredValidator(errorText: "Value is not number"),
+          ),
+          const SizedBox(height: defaultPadding),
           TextFieldName(text: "Caterory"),
           // Same for phone number
           ValueListenableBuilder<String>(

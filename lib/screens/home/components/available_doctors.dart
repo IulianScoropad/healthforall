@@ -1,14 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:healthforall/components/available_doctor_card.dart';
 import 'package:healthforall/components/section_title.dart';
+import 'package:healthforall/constants.dart';
 import 'package:healthforall/models/AvailableDoctor.dart';
-import 'package:flutter/material.dart';
+import 'package:healthforall/models/DoctorProvider.dart';
+import 'package:healthforall/screens/doctors/doctors_screen.dart';
 
-import '../../../constants.dart';
+class AvailableDoctors extends StatefulWidget {
 
-class AvailableDoctors extends StatelessWidget {
-  const AvailableDoctors({
-    Key? key,
-  }) : super(key: key);
+  const AvailableDoctors({Key? key}) : super(key: key);
+
+  @override
+  _AvailableDoctorsState createState() => _AvailableDoctorsState();
+}
+
+class _AvailableDoctorsState extends State<AvailableDoctors> {
+  late Future<List<AvailableDoctor>> futureDoctors;
+
+  @override
+  void initState() {
+    super.initState();
+    futureDoctors = DoctorProvider.fetchDoctors();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +31,42 @@ class AvailableDoctors extends StatelessWidget {
           padding: const EdgeInsets.all(defaultPadding),
           child: SectionTitle(
             title: "Available Doctor",
-            pressOnSeeAll: () {},
-          ),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(
-              demoAvailableDoctors.length,
-              (index) => Padding(
-                padding: const EdgeInsets.only(left: defaultPadding),
-                child: AvailableDoctorCard(
-                  info: demoAvailableDoctors[index],
-                ),
+            pressOnSeeAll: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DoctorsScreen(),
               ),
             ),
           ),
-        )
+        ),
+        FutureBuilder<List<AvailableDoctor>>(
+          future: futureDoctors,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text('No doctors found'));
+            }
+
+            List<AvailableDoctor> doctors = snapshot.data!;
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(
+                  doctors.length,
+                      (index) => Padding(
+                    padding: const EdgeInsets.only(left: defaultPadding),
+                    child: AvailableDoctorCard(
+                      info: doctors[index],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
   }

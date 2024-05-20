@@ -12,10 +12,10 @@ final dropdownInputDecoration = InputDecoration(
 
 class SearchForm extends StatelessWidget {
 
-  final String userId;
+
 
   const SearchForm({
-    Key? key, required this.userId
+    Key? key
   }) : super(key: key);
 
 
@@ -93,7 +93,7 @@ class SearchForm extends StatelessWidget {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SearchResultScreen( userId: userId),
+                  builder: (context) => SearchResultScreen(),
                 ),
               ),
               child: Text("Search"),

@@ -28,11 +28,11 @@ class AvailableDoctorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  info.name!,
+                  info.username!,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
-                  info.sector!,
+                  info.region!,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Padding(
@@ -55,7 +55,7 @@ class AvailableDoctorCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  info.patients!,
+                  info.numarpacienti!,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],

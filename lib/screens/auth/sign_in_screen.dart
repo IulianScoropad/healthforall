@@ -27,10 +27,10 @@ class SignInScreen extends StatelessWidget {
     Map<dynamic, dynamic> pacienti = snapshot.value as Map<dynamic, dynamic>;
     pacienti.forEach((key, value) {
       if(value['password'] == password){
-        userId = key;
+        globalUserId = key;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen(userId: userId)),
+        MaterialPageRoute(builder: (context) => MainScreen()),
        );
       //  Navigator.pushNamed(
       //    context,

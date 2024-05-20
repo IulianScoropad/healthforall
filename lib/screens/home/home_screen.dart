@@ -18,7 +18,6 @@ class HomePage extends StatelessWidget {
               CustomAppBar(
                 text: "Find Your",
                 title: "Specialist",
-                userId: "null",
               ),
               RecommendedDoctors(),
               Categories(),

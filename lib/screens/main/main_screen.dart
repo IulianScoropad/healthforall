@@ -10,9 +10,8 @@ import '../../constants.dart';
 class MainScreen extends StatefulWidget {
   static const String routeName = '/main';
 
- final String userId;
 
-  const MainScreen({Key? key, required this.userId}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
 
   @override
@@ -26,9 +25,9 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _pages = [
       HomePage(),
-      DoctorsScreen(userId: widget.userId),
+      DoctorsScreen(),
       MyAppointmentScreen(),
-      ProfileScreen(userId: widget.userId), // Accesăm userId folosind widget.userId aici
+      ProfileScreen(), // Accesăm userId folosind widget.userId aici
     ];
   }
   int _selectedPage = 0;

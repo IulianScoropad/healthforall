@@ -1,45 +1,43 @@
-class AvailableDoctor {
-  final String? name, sector, patients, image;
-  final int? experience;
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 
-  AvailableDoctor(
-      {this.name, this.sector, this.experience, this.patients, this.image});
+class AvailableDoctor {
+  final String? username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
+
+
+  AvailableDoctor({
+    this.experience,
+    this.username,
+    this.time,
+    this.region,
+    this.phone,
+    this.numarpacienti,
+    this.mail,
+    this.hospitalname,
+    this.categorie,
+    this.adresa,
+    this.despre,
+    this.image
+  });
+
+
+  factory AvailableDoctor.fromMap(Map<dynamic, dynamic> data) {
+   // Map<dynamic, dynamic>? data = snapshot.value as Map<dynamic, dynamic>?;
+
+    return AvailableDoctor(
+      username: data?['username'],
+      region: data?['region'],
+      experience: data?['experienceyears'],
+      numarpacienti: data?['numberpatienti'],
+      time: data?['time'],
+      phone: data?['phone'],
+      mail: data?['mail'],
+      hospitalname: data?['hospitalname'],
+      adresa: data?['adress'],
+      despre: data?['about'],
+      image: "assets/images/Serena_Gome.png",
+      categorie: "category"
+    );
+  }
 }
 
-List<AvailableDoctor> demoAvailableDoctors = [
-  AvailableDoctor(
-    name: "Dr. Serena Gome",
-    sector: "Medicine Specialist",
-    experience: 8,
-    patients: '1.08K',
-    image: "assets/images/Serena_Gome.png",
-  ),
-  AvailableDoctor(
-    name: "Dr. Asma Khan",
-    sector: "Medicine Specialist",
-    experience: 5,
-    patients: '2.7K',
-    image: "assets/images/Asma_Khan.png",
-  ),
-  AvailableDoctor(
-    name: "Dr. Kiran Shakia",
-    sector: "Medicine Specialist",
-    experience: 5,
-    patients: '2.7K',
-    image: "assets/images/Kiran_Shakia.png",
-  ),
-  AvailableDoctor(
-    name: "Dr. Masuda Khan",
-    sector: "Medicine Specialist",
-    experience: 5,
-    patients: '2.7K',
-    image: "assets/images/Masuda_Khan.png",
-  ),
-  AvailableDoctor(
-    name: "Dr. Johir Raihan",
-    sector: "Medicine Specialist",
-    experience: 5,
-    patients: '2.7K',
-    image: "assets/images/Johir_Raihan.png",
-  ),
-];

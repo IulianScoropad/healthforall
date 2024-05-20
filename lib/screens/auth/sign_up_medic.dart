@@ -79,7 +79,8 @@ class SignUpMedic extends StatelessWidget {
                             "hospitalname" : editHospitalNameController.text.toString(),
                             "time": editTimeController.text.toString(),
                             "numberpatienti": editNumberOfPatienceController.text.toString(),
-                            "about": editAboutDoctorController.text.toString()
+                            "about": editAboutDoctorController.text.toString(),
+                            "experienceyears": editYearsExperienceController.text.toString()
                           };
                           dbRef.child("Doctors").push().set(data).then((value){
                             Navigator.of(context).pop();

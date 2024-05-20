@@ -1,13 +1,14 @@
+import 'package:healthforall/controllers.dart';
+
 import '../../constants.dart';
 import 'package:healthforall/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String userId;
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
-   ProfileScreen({Key? key, required this.userId}) : super(key: key);
+   ProfileScreen({Key? key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -30,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> fetchUserData() async {
     try {
       final databaseReference = FirebaseDatabase.instance.reference();
-      DatabaseEvent event = await databaseReference.child('Pacienti/${widget.userId}').once();
+      DatabaseEvent event = await databaseReference.child('Pacienti/${globalUserId}').once();
       DataSnapshot snapshot = event.snapshot;
       if (snapshot.value != null) {
         Map<String, dynamic> userData = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
