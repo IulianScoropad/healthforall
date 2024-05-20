@@ -5,10 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants.dart';
 
 class CustomAppBar extends StatelessWidget {
+  final String userId;
+
   const CustomAppBar({
     Key? key,
     required this.text,
     required this.title,
+    required this.userId,
   }) : super(key: key);
 
   final String text, title;
@@ -39,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SearchScreen(),
+                builder: (context) => SearchScreen(userId: userId),
               ),
             ),
             icon: SvgPicture.asset("assets/icons/Serach.svg"),

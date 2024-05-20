@@ -5,6 +5,22 @@ import 'package:form_field_validator/form_field_validator.dart';
 import '../../../constants.dart';
 import '../../../controllers.dart';
 
+class DropdownController {
+  ValueNotifier<String> _valueNotifier;
+
+  DropdownController(String initialValue)
+      : _valueNotifier = ValueNotifier<String>(initialValue);
+
+  String get value => _valueNotifier.value;
+
+  set value(String newValue) {
+    _valueNotifier.value = newValue;
+  }
+
+  ValueNotifier<String> get notifier => _valueNotifier;
+}
+
+
 class SignUpForm extends StatelessWidget {
 
    SignUpForm({
@@ -13,8 +29,7 @@ class SignUpForm extends StatelessWidget {
   }) : super(key: key);
 
   final GlobalKey formKey;
-
-
+   final DropdownController dropdownController = DropdownController('Alba');
 
   late String _userName, _email, _password, _phoneNumber;
 
@@ -56,8 +71,46 @@ class SignUpForm extends StatelessWidget {
             onSaved: (phoneNumber) => _phoneNumber = phoneNumber!,
           ),
           const SizedBox(height: defaultPadding),
-          TextFieldName(text: "Password"),
+          TextFieldName(text: "Region"),
+          // Same for phone number
+      ValueListenableBuilder<String>(
+        valueListenable: dropdownController.notifier,
+         builder:(context, value, child) {
+           return DropdownButton<String>(
+             value: value,
+             icon: const Icon(Icons.arrow_downward),
+             iconSize: 24,
+             elevation: 16,
+             style: const TextStyle(color: Colors.deepPurple),
+             underline: Container(
+               height: 2,
+               color: Colors.deepPurpleAccent,
+             ),
+             onChanged: (String? value) {
+               if (value != null) {
+                 dropdownController.value = value;
+                 editRegionController.text = dropdownController.value;
+               }
+             },
+             items: list.map<DropdownMenuItem<String>>((String value) {
+               return DropdownMenuItem<String>(
+                 value: value,
+                 child: Text(value),
+               );
+             }).toList(),
+           );
+         },
+      ),
 
+          const SizedBox(height: defaultPadding),
+          TextFieldName(text: "Adresss"),
+          // Same for phone number
+          TextFormField(
+            controller: editAdressController,
+            decoration: InputDecoration(hintText: "adress"),
+          ),
+          const SizedBox(height: defaultPadding),
+          TextFieldName(text: "Password"),
           TextFormField(
             // We want to hide our password
             obscureText: true,

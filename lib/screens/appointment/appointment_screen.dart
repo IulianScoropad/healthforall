@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'cpmponents/calendar.dart';
 
 class AppointmentScreen extends StatefulWidget {
-  const AppointmentScreen({Key? key}) : super(key: key);
+
+  final String userId;
+  const AppointmentScreen({Key? key, required this.userId}) : super(key: key);
 
   @override
   _AppointmentScreenState createState() => _AppointmentScreenState();
@@ -80,7 +82,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MainScreen(),
+                  builder: (context) => MainScreen(userId: widget.userId),
                 ),
               ),
               child: Text("Confirm  Appoinment"),

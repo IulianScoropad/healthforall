@@ -3,6 +3,9 @@ import 'package:healthforall/screens/auth/sign_in_screen.dart';
 import 'package:healthforall/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:healthforall/screens/auth/select_type_user.dart';
+
+
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -33,7 +36,7 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
+                          builder: (context) => SelectTypeUser(),
                         ),
                       ),
                       style: TextButton.styleFrom(

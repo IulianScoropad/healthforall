@@ -1,4 +1,4 @@
-import 'package:healthforall/screens/auth/sign_up_screen.dart';
+import 'package:healthforall/screens/auth/select_type_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:healthforall/screens/home/home_screen.dart';
@@ -12,6 +12,7 @@ class SignInScreen extends StatelessWidget {
   // It's time to validat the text field
   final _formKey = GlobalKey<FormState>();
   String errorMessage = '';
+  String userId = '';
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
   Future<void> login(BuildContext context, String email, String password) async{
@@ -26,10 +27,16 @@ class SignInScreen extends StatelessWidget {
     Map<dynamic, dynamic> pacienti = snapshot.value as Map<dynamic, dynamic>;
     pacienti.forEach((key, value) {
       if(value['password'] == password){
+        userId = key;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
-        );
+        MaterialPageRoute(builder: (context) => MainScreen(userId: userId)),
+       );
+      //  Navigator.pushNamed(
+      //    context,
+       //   MainScreen.routeName,
+       //   arguments: userId,
+       // );
       } else{
           errorMessage ='Incorrect password';
 
@@ -80,7 +87,7 @@ class SignInScreen extends StatelessWidget {
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SignUpScreen(),
+                              builder: (context) => SelectTypeUser(),
                             ),
                           ),
                           child: Text(

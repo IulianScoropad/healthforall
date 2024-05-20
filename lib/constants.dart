@@ -19,6 +19,11 @@ OutlineInputBorder textFieldBorder = OutlineInputBorder(
 const emailError = 'Enter a valid email address';
 const requiredField = "This field is required";
 
+const List<String> list = <String>['Alba', 'Arad', 'Argeş', 'Bacău', 'Bihor', 'Bistriţa-Năsăud', 'Botoşani', 'Brăila', 'Braşov',
+  'Bucureşti', 'Călăraşi', 'Caraş-Severin', 'Cluj', 'Constanţa', 'Covasna', 'Dâmboviţa', 'Dolj', '	Galaţi', 'Giurgiu', 'Gorj'
+  , 'Harghita', 'Hunedoara', 'Ialomiţa', 'Iaşi', 'Ilfov', 'Maramureş', 'Mehedinţi', 'Mureş', 'Neamţ', 'Olt', 'Prahova'
+  , 'Sălaj', 'Satu Mare', 'Sibiu', 'Suceava', 'Teleorman', 'Timiş', 'Tulcea', 'Vâlcea', 'Vaslui', 'Vrancea'];
+
 final passwordValidator = MultiValidator(
   [
     RequiredValidator(errorText: 'password is required'),

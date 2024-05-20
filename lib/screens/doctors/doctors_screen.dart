@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'components/docotor_card.dart';
 
 class DoctorsScreen extends StatelessWidget {
-  const DoctorsScreen({Key? key}) : super(key: key);
+  final String userId;
+
+  const DoctorsScreen({Key? key,required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class DoctorsScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              CustomAppBar(text: "Available", title: "Specialist"),
+              CustomAppBar(text: "Available", title: "Specialist", userId: "null",),
               Padding(
                 padding: const EdgeInsets.all(defaultPadding),
                 child: GridView.builder(
@@ -33,7 +35,7 @@ class DoctorsScreen extends StatelessWidget {
                     press: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DoctorDetailsScreen(),
+                        builder: (context) => DoctorDetailsScreen(userId: userId),
                       ),
                     ),
                   ),

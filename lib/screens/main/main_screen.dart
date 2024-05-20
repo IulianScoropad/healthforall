@@ -8,19 +8,29 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../constants.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  static const String routeName = '/main';
+
+ final String userId;
+
+  const MainScreen({Key? key, required this.userId}) : super(key: key);
+
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Widget> _pages = [
-    HomePage(),
-    DoctorsScreen(),
-    MyAppointmentScreen(),
-    ProfileScreen(),
-  ];
+  late final List<Widget> _pages;
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      HomePage(),
+      DoctorsScreen(userId: widget.userId),
+      MyAppointmentScreen(),
+      ProfileScreen(userId: widget.userId), // Accesăm userId folosind widget.userId aici
+    ];
+  }
   int _selectedPage = 0;
   @override
   Widget build(BuildContext context) {

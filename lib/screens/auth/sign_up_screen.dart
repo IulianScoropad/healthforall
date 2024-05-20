@@ -1,5 +1,6 @@
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/screens/auth/sign_in_screen.dart';
+import 'package:healthforall/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -71,6 +72,8 @@ class SignUpScreen extends StatelessWidget {
                               "mail": editMaileController.text.toString(),
                               "phone": editPhoneNumberController.text.toString(),
                               "password": editPasswordController.text.toString(),
+                              "adress": editAdressController.text.toString(),
+                              "region": editRegionController.text.toString(),
                             };
                             dbRef.child("Pacienti").push().set(data).then((value){
                               Navigator.of(context).pop();

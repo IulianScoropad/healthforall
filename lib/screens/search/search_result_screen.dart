@@ -12,7 +12,9 @@ import 'package:flutter_svg/svg.dart';
 import 'components/search_doctor_card.dart';
 
 class SearchResultScreen extends StatelessWidget {
-  const SearchResultScreen({Key? key}) : super(key: key);
+  final String userId;
+
+  const SearchResultScreen({Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class SearchResultScreen extends StatelessWidget {
                         press: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DoctorDetailsScreen(),
+                            builder: (context) => DoctorDetailsScreen(userId: userId),
                           ),
                         ),
                       ),

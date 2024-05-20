@@ -1,9 +1,55 @@
 import '../../constants.dart';
 import 'package:healthforall/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  final String userId;
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+
+   ProfileScreen({Key? key, required this.userId}) : super(key: key);
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+   late String _name ;
+  late  String _email ;
+   late String _phoneNumber;
+  late  String _address ;
+   late  String _region ;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final databaseReference = FirebaseDatabase.instance.reference();
+      DatabaseEvent event = await databaseReference.child('Pacienti/${widget.userId}').once();
+      DataSnapshot snapshot = event.snapshot;
+      if (snapshot.value != null) {
+        Map<String, dynamic> userData = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
+        setState(() {
+          _name = userData['username'];
+          _email = userData['mail'];
+          _phoneNumber = userData['phone'];
+          _address = userData['adress'];
+          _region = userData['region'];
+          _isLoading = false;
+        });
+      }
+    } catch (error) {
+      print("Error fetching user data: $error");
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +71,9 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body:  _isLoading
+          ? Center(child: CircularProgressIndicator())
+          :SingleChildScrollView(
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
@@ -43,29 +91,38 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                    initialValue: "Anwar Abir",
+                    initialValue: _name,
                     decoration: inputDecoration.copyWith(hintText: "Name"),
+                      readOnly: true,
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: defaultPadding),
                     child: TextFormField(
-                      initialValue: "test@gmail.com",
+                      initialValue: _email,
                       decoration: inputDecoration.copyWith(hintText: "Email"),
+                        readOnly: true,
                     ),
                   ),
                   TextFormField(
-                    initialValue: "+88019389898",
+                    initialValue: _phoneNumber,
                     decoration:
                         inputDecoration.copyWith(hintText: "Phone Number"),
+                      readOnly: true,
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: defaultPadding),
                     child: TextFormField(
-                      initialValue: "Rampura, Banasree",
+                      initialValue: _address,
                       decoration: inputDecoration.copyWith(hintText: "Address"),
                     ),
+                  ),
+                  TextFormField(
+                    initialValue: _region,
+                    decoration:
+                    inputDecoration.copyWith(hintText: "Region"),
+                    readOnly: true,
                   ),
                 ],
               ),

@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'components/communication.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
-  const DoctorDetailsScreen({Key? key}) : super(key: key);
+  final String userId;
+
+  const DoctorDetailsScreen({Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AppointmentScreen(),
+                      builder: (context) => AppointmentScreen(userId: userId),
                     ),
                   ),
                   child: Text("Book an Appoinment"),

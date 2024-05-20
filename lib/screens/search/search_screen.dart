@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'components/search_form.dart';
 
 class SearchScreen extends StatelessWidget {
+  final String userId;
+  const SearchScreen({Key? key, required this.userId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class SearchScreen extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: defaultPadding),
-              SearchForm(),
+              SearchForm(userId: userId),
             ],
           ),
         ),
