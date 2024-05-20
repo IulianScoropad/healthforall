@@ -1,20 +1,22 @@
 import 'package:healthforall/components/heightlight.dart';
 import 'package:healthforall/components/rating.dart';
+import 'package:healthforall/models/AvailableDoctor.dart';
 import '../../constants.dart';
 import 'package:healthforall/screens/appointment/appointment_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/SearchDoctor.dart';
 import 'components/communication.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
-
-  const DoctorDetailsScreen({Key? key}) : super(key: key);
+  final AvailableDoctor doctor;
+  const DoctorDetailsScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dr. Serena Gome"),
+        title: Text("Dr." + (doctor.username ?? "")),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,10 +30,10 @@ class DoctorDetailsScreen extends StatelessWidget {
                 child: Communication(),
               ),
               Text(
-                "Medicine & Heart Spelist",
+               doctor.categorie ?? "",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              Text("Good Health Clinic, MBBS, FCPS"),
+              Text(doctor.hospitalname ?? ""),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: defaultPadding / 4),
@@ -39,14 +41,14 @@ class DoctorDetailsScreen extends StatelessWidget {
               ),
               SizedBox(height: defaultPadding),
               Text(
-                "About Serena",
+                "About"+ (doctor.username ?? " "),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: defaultPadding / 2),
                 child: Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                doctor.despre ?? "",
                 ),
               ),
               Padding(
@@ -56,11 +58,11 @@ class DoctorDetailsScreen extends StatelessWidget {
                   children: [
                     Highlight(
                       name: "Patients",
-                      text: "1.08K",
+                      text: doctor.numarpacienti ?? "",
                     ),
                     Highlight(
                       name: "Experience",
-                      text: "8 Years",
+                      text: (doctor.experience ?? "") +"Years" ,
                     ),
                     Highlight(
                       name: "Reviews",

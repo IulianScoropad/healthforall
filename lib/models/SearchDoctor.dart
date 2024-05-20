@@ -1,8 +1,8 @@
 class SearchDoctor {
-  final String? image, name, speciality, time, hospitalName;
+  final String? image, name, speciality, time, hospitalName, category, region;
 
   SearchDoctor(
-      {this.image, this.name, this.speciality, this.time, this.hospitalName});
+      {this.image, this.name, this.speciality, this.time, this.hospitalName, this.category,this.region});
 }
 
 List<SearchDoctor> demo_search_doctors = [

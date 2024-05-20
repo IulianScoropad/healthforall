@@ -1,3 +1,4 @@
+import 'package:healthforall/controllers.dart';
 import 'package:healthforall/screens/search/search_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,18 +6,17 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../../constants.dart';
 
-final dropdownInputDecoration = InputDecoration(
-  border: OutlineInputBorder(),
-  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: defaultPadding),
-);
+import 'package:flutter/material.dart';
+import 'package:healthforall/screens/search/search_result_screen.dart';
 
-class SearchForm extends StatelessWidget {
+class SearchForm extends StatefulWidget {
+  const SearchForm({Key? key}) : super(key: key);
 
+  @override
+  _SearchFormState createState() => _SearchFormState();
+}
 
-
-  const SearchForm({
-    Key? key
-  }) : super(key: key);
+class _SearchFormState extends State<SearchForm> {
 
 
   @override
@@ -26,76 +26,74 @@ class SearchForm extends StatelessWidget {
         children: [
           DropdownButtonFormField(
             icon: SvgPicture.asset("assets/icons/address.svg"),
-            items: currencies.map<DropdownMenuItem<String>>((String category) {
+            items: list.map<DropdownMenuItem<String>>((String region) {
+              return DropdownMenuItem(
+                value: region,
+                child: Text(region),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                globalSelectedRegion = value as String?;
+              });
+            },
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: "Select Area",
+            ),
+          ),
+          DropdownButtonFormField(
+            icon: SvgPicture.asset(
+              "assets/icons/stethoscope.svg",
+              height: 17,
+              color: Color(0xFF677B92),
+            ),
+            items: categoryList.map<DropdownMenuItem<String>>((String category) {
               return DropdownMenuItem(
                 value: category,
                 child: Text(category),
               );
             }).toList(),
-            onChanged: (value) {},
-            validator: RequiredValidator(errorText: requiredField),
-            decoration: dropdownInputDecoration.copyWith(
-              hintText: "Select Area",
+            onChanged: (value) {
+              setState(() {
+                globalSelectedCategory = value as String?;
+              });
+            },
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: "Select Category",
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding),
-            child: DropdownButtonFormField(
-              icon: SvgPicture.asset(
-                "assets/icons/stethoscope.svg",
-                height: 17,
-                color: Color(0xFF677B92),
-              ),
-              items:
-                  currencies.map<DropdownMenuItem<String>>((String category) {
-                return DropdownMenuItem(
-                  value: category,
-                  child: Text(category),
-                );
-              }).toList(),
-              onChanged: (value) {},
-              validator: RequiredValidator(errorText: requiredField),
-              decoration: dropdownInputDecoration.copyWith(
-                hintText: "Doctor, Specialist",
-              ),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () {
-              showDatePicker(
+          ElevatedButton(
+            onPressed: () async {
+              // Afisare calendar pentru selectarea datei
+              final DateTime? pickedDate = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(2000),
                 lastDate: DateTime(2025),
               );
+
+              if (pickedDate != null && pickedDate != globalSelectedDate) {
+                setState(() {
+                  globalSelectedDate = pickedDate;
+                });
+              }
             },
-            color: Colors.white,
-            elevation: 0,
-            padding: EdgeInsets.symmetric(
-                horizontal: 12, vertical: defaultPadding * 1.25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Select Date",
-                  style: TextStyle(
-                    color: textColor.withOpacity(0.7),
-                    fontSize: 15,
-                  ),
-                ),
-                SvgPicture.asset("assets/icons/event.svg")
-              ],
-            ),
+            child: Text("Select Date"),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SearchResultScreen(),
-                ),
-              ),
+              onPressed: () {
+                // Filtrare si navigare catre rezultatele cautarii
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SearchResultScreen(),
+                  ),
+                );
+              },
               child: Text("Search"),
             ),
           ),
@@ -104,14 +102,3 @@ class SearchForm extends StatelessWidget {
     );
   }
 }
-
-var currencies = [
-  "Food",
-  "Transport",
-  "Personal",
-  "Shopping",
-  "Medical",
-  "Rent",
-  "Movie",
-  "Salary"
-];

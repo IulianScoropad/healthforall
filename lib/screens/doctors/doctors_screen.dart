@@ -64,7 +64,7 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                         press: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DoctorDetailsScreen(),
+                            builder: (context) => DoctorDetailsScreen(doctor: doctors[index]),
                           ),
                         ),
                       ),

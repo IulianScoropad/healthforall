@@ -1,13 +1,17 @@
-import 'package:healthforall/models/Category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../components/section_title.dart';
 import '../../../constants.dart';
+import '../../../models/AvailableDoctor.dart';
+import '../../../models/Category.dart';
+import '../../../screens/details/doctor_details_screen.dart';
 
 class Categories extends StatelessWidget {
+  final List<AvailableDoctor> doctors;
+
   const Categories({
     Key? key,
+    required this.doctors,
   }) : super(key: key);
 
   @override
@@ -26,9 +30,9 @@ class Categories extends StatelessWidget {
           child: Row(
             children: List.generate(
               demo_categories.length,
-              (index) => CategoryCard(
+                  (index) => CategoryCard(
                 category: demo_categories[index],
-                press: () {},
+                doctors: doctors,
               ),
             ),
           ),
@@ -39,21 +43,30 @@ class Categories extends StatelessWidget {
 }
 
 class CategoryCard extends StatelessWidget {
+  final Category category;
+  final List<AvailableDoctor> doctors;
+
   const CategoryCard({
     Key? key,
     required this.category,
-    required this.press,
+    required this.doctors,
   }) : super(key: key);
-
-  final Category category;
-  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
+    final doctorsInCategory = doctors.where((doctor) => doctor.categorie == category.title).toList();
+
     return Padding(
       padding: const EdgeInsets.only(left: defaultPadding),
       child: InkWell(
-        onTap: press,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DoctorsInCategoryScreen(doctors: doctorsInCategory),
+            ),
+          );
+        },
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Container(
           padding: EdgeInsets.all(defaultPadding / 2),
@@ -80,6 +93,41 @@ class CategoryCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DoctorsInCategoryScreen extends StatelessWidget {
+  final List<AvailableDoctor> doctors;
+
+  const DoctorsInCategoryScreen({
+    Key? key,
+    required this.doctors,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Doctors in Category"),
+      ),
+      body: ListView.builder(
+        itemCount: doctors.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(doctors[index].username ?? ""),
+            subtitle: Text(doctors[index].region ?? ""),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DoctorDetailsScreen(doctor: doctors[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

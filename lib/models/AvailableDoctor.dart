@@ -2,10 +2,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class AvailableDoctor {
-  final String? username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
-
+  final String?  username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
+   Key? key;
 
   AvailableDoctor({
+ this.key,
     this.experience,
     this.username,
     this.time,

@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
                 title: "Specialist",
               ),
               RecommendedDoctors(),
-              Categories(),
+              Categories(doctors: []),
               AvailableDoctors()
             ],
           ),

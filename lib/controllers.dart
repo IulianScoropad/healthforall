@@ -17,3 +17,6 @@ final TextEditingController editAboutDoctorController = TextEditingController();
 final TextEditingController editYearsExperienceController = TextEditingController();
 
 String? globalUserId;
+String? globalSelectedRegion;
+String? globalSelectedCategory;
+DateTime? globalSelectedDate;
