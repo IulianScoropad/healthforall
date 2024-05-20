@@ -24,6 +24,8 @@ const List<String> list = <String>['Alba', 'Arad', 'Argeş', 'Bacău', 'Bihor', 
   , 'Harghita', 'Hunedoara', 'Ialomiţa', 'Iaşi', 'Ilfov', 'Maramureş', 'Mehedinţi', 'Mureş', 'Neamţ', 'Olt', 'Prahova'
   , 'Sălaj', 'Satu Mare', 'Sibiu', 'Suceava', 'Teleorman', 'Timiş', 'Tulcea', 'Vâlcea', 'Vaslui', 'Vrancea'];
 
+const List<String> categoryList = <String>['Pediatrician', 'Neurosurgeon','Cardiologist','Psychiatrist'];
+
 final passwordValidator = MultiValidator(
   [
     RequiredValidator(errorText: 'password is required'),

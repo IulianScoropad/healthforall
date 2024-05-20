@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:healthforall/screens/auth/sign_up_medic.dart';
 import 'package:healthforall/screens/auth/sign_up_screen.dart';
 class SelectTypeUser extends StatelessWidget {
   @override
@@ -52,9 +53,14 @@ class SelectTypeUser extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () {
-                        // Handle button 2 press
-                      },
+                      onPressed:
+                            () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpMedic(),
+                          ),
+                        ),
+
                       child: Text("Doctor",
                         style: TextStyle(
                             color: Colors.black,
