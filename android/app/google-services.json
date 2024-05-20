@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "298344896567",
+    "firebase_url": "https://health-app-71b25-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "health-app-71b25",
+    "storage_bucket": "health-app-71b25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298344896567:android:fcd3361b4f951583f907b2",
+        "android_client_info": {
+          "package_name": "com.example.healthforall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYOEgisWwpwnsbkP4nwIr68uwTX5ZLJFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
