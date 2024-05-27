@@ -2,9 +2,12 @@ import '../../../constants.dart';
 import 'package:flutter/material.dart';
 
 class Calendar extends StatefulWidget {
+  final Function(DateTime) onDateSelected;
+  const Calendar({Key? key, required this.onDateSelected}) : super(key: key);
   @override
   _CalendarState createState() => _CalendarState();
 }
+
 
 class _CalendarState extends State<Calendar> {
   DateTime selectedDate = DateTime.now();
@@ -54,6 +57,7 @@ class _CalendarState extends State<Calendar> {
                   setState(() {
                     currentDateSelectedIndex = index;
                     selectedDate = DateTime.now().add(Duration(days: index));
+                    widget.onDateSelected(selectedDate);
                   });
                 },
                 child: Container(

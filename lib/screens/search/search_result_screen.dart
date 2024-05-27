@@ -82,7 +82,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         Map<dynamic, dynamic> values = snapshot.data!.snapshot.value;
                         List<AvailableDoctor> searchDoctors = [];
                         values.forEach((key, value) {
-                          searchDoctors.add(AvailableDoctor.fromMap(value));
+                          searchDoctors.add(AvailableDoctor.fromMap(key,value));
                         });
 
                         return Column(

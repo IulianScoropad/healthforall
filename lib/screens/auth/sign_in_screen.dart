@@ -25,9 +25,11 @@ class SignInScreen extends StatelessWidget {
       DataSnapshot snapshot = value.snapshot;
       if (snapshot.value != null){
     Map<dynamic, dynamic> pacienti = snapshot.value as Map<dynamic, dynamic>;
+    bool foundUser = false;
     pacienti.forEach((key, value) {
       if(value['password'] == password){
         globalUserId = key;
+        foundUser = true;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainScreen()),
@@ -42,10 +44,42 @@ class SignInScreen extends StatelessWidget {
 
         }
     });
-  }else {
-        errorMessage ='Email not found';
-
-  }
+    if (!foundUser) {
+      errorMessage = 'Incorrect password';
+    }
+      } else {
+        // Search in 'Doctori' table
+        value =
+        await dbRef.child('Doctors').orderByChild('mail').equalTo(email).once();
+        snapshot = value.snapshot;
+        if (snapshot.value != null) {
+          Map<dynamic, dynamic> doctori = snapshot.value as Map<dynamic,
+              dynamic>;
+          bool foundUser = false;
+          doctori.forEach((key, value) {
+            if (value['password'] == password) {
+              globalUserId = key;
+              foundUser = true;
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreen()),
+              );
+              // Navigator.pushNamed(
+              //   context,
+              //   MainScreen.routeName,
+              //   arguments: userId,
+              // );
+            } else {
+              errorMessage = 'Incorrect password';
+            }
+          });
+          if (!foundUser) {
+            errorMessage = 'Incorrect password';
+          }
+        } else {
+          errorMessage = 'Email not found';
+        }
+      }
   } catch (e){
       errorMessage = 'An error occurred. Please try again.';
 

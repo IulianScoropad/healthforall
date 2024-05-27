@@ -13,7 +13,7 @@ class DoctorProvider {
       if (snapshot.value != null) {
         Map<dynamic, dynamic> doctorData = snapshot.value as Map<dynamic, dynamic>;
         doctorData.forEach((key, value) {
-          doctors.add(AvailableDoctor.fromMap(Map<String, dynamic>.from(value)));
+          doctors.add(AvailableDoctor.fromMap(key,Map<String, dynamic>.from(value)));
         });
       }
     } catch (error) {

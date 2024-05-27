@@ -2,11 +2,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class AvailableDoctor {
-  final String?  username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
-   Key? key;
+  final String? key, username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
+
 
   AvailableDoctor({
- this.key,
+    required this.key,
     this.experience,
     this.username,
     this.time,
@@ -22,10 +22,11 @@ class AvailableDoctor {
   });
 
 
-  factory AvailableDoctor.fromMap(Map<dynamic, dynamic> data) {
+  factory AvailableDoctor.fromMap(String key,Map<dynamic, dynamic> data) {
    // Map<dynamic, dynamic>? data = snapshot.value as Map<dynamic, dynamic>?;
 
     return AvailableDoctor(
+      key: key,
       username: data?['username'],
       region: data?['region'],
       experience: data?['experienceyears'],
