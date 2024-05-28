@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart'; // Importați pachetul Firebase
+List<RecommendedDoctor> recommendedDoctors = [];
 class RecommendedDoctor {
   final String name, speciality, institute, image;
 
@@ -9,35 +11,41 @@ class RecommendedDoctor {
   });
 }
 
-const List<RecommendedDoctor> demo_recommended_doctor = [
-  RecommendedDoctor(
-    name: "Dr. Salina Zaman",
-    speciality: "Medicine & Heart Spelist",
-    institute: "Good Health Clinic",
-    image: "assets/images/Salina_Zaman.png",
-  ),
-  RecommendedDoctor(
-    name: "Dr. Serena Gome",
-    speciality: "Medicine Specialist ",
-    institute: "Good Health Clinic",
-    image: "assets/images/Serena_Gome.png",
-  ),
-  RecommendedDoctor(
-    name: "Dr. Salina Zaman",
-    speciality: "Medicine & Heart Spelist",
-    institute: "Good Health Clinic",
-    image: "assets/images/Salina_Zaman.png",
-  ),
-  RecommendedDoctor(
-    name: "Dr. Asma Khan",
-    speciality: "Medicine & Heart Spelist",
-    institute: "Good Health Clinic",
-    image: "assets/images/Asma_Khan.png",
-  ),
-  RecommendedDoctor(
-    name: "Dr. Salina Zaman",
-    speciality: "Medicine & Heart Spelist",
-    institute: "Good Health Clinic",
-    image: "assets/images/Salina_Zaman.png",
-  ),
-];
+class RecommendedDoctorService {
+  final DatabaseReference _database = FirebaseDatabase.instance.reference().child('Doctors');
+
+  Future<List<RecommendedDoctor>> getRecommendedDoctors() async {
+
+
+    try {
+      DatabaseEvent value = await _database.once();
+      final snapshot = value.snapshot;
+
+      if (snapshot.value != null) {
+        Map<dynamic, dynamic> doctorsData = snapshot.value as Map<dynamic, dynamic>;
+        doctorsData.forEach((key, value) {
+          String name = value['username'];
+          String speciality = value['category'];
+          String institute = value['hospitalname'];
+          String image = "assets/images/Serena_Gome.png";
+          String experienceAsString = value['experienceyears'];
+           // Experiența ca șir de caractere
+          int experience = int.parse(experienceAsString);
+          if (experience >= 10) {
+            RecommendedDoctor doctor = RecommendedDoctor(
+              name: name,
+              speciality: speciality,
+              institute: institute,
+              image: image,
+            );
+            recommendedDoctors.add(doctor);
+          }
+        });
+      }
+    } catch (error) {
+      print('Error fetching recommended doctors: $error');
+    }
+
+    return recommendedDoctors;
+  }
+}

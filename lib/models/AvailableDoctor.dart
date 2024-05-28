@@ -1,8 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AvailableDoctor {
   final String? key, username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
+
 
 
   AvailableDoctor({

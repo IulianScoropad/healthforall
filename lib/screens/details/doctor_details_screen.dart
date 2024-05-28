@@ -66,7 +66,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                     ),
                     Highlight(
                       name: "Experience",
-                      text: (doctor.experience ?? "") +"Years" ,
+                      text: (doctor.experience ?? "") + "Years" ,
                     ),
                     Highlight(
                       name: "Reviews",

@@ -7,6 +7,7 @@ import '../../constants.dart';
 import 'components/sign_in_form.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../../controllers.dart';
+import 'package:healthforall/screens/home/home_screen_doctor.dart';
 
 class SignInScreen extends StatelessWidget {
   // It's time to validat the text field
@@ -62,7 +63,7 @@ class SignInScreen extends StatelessWidget {
               foundUser = true;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MainScreen()),
+                MaterialPageRoute(builder: (context) => HomeScreenDoctor() ),
               );
               // Navigator.pushNamed(
               //   context,

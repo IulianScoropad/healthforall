@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:healthforall/controllers.dart';
 
+import '../../../chat/chat.dart';
 import '../../../constants.dart';
 
 class Communication extends StatelessWidget {
@@ -45,7 +47,14 @@ class Communication extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16),
               backgroundColor: Color(0xFFFBA351).withOpacity(0.75),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatScreen(chatId: doctorID! + "_" + globalUserId!, userId: globalUserId!),
+                ),
+              );
+            },
             icon: SvgPicture.asset(
               "assets/icons/Chat.svg",
               color: Colors.white,
