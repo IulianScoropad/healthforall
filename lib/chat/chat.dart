@@ -5,7 +5,7 @@ class ChatScreen extends StatefulWidget {
   final String chatId;
   final String userId;
 
-  const ChatScreen({Key? key, required this.chatId, required this.userId}) : super(key: key);
+  const ChatScreen({super.key, required this.chatId, required this.userId});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -20,7 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: const Text("Chat"),
       ),
       body: Column(
         children: [
@@ -29,7 +29,7 @@ class _ChatScreenState extends State<ChatScreen> {
               stream: _databaseReference.child('chats/${widget.chatId}/messages').orderByChild('timestamp').onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
                 List messageList = messages.values.toList();
@@ -55,14 +55,14 @@ class _ChatScreenState extends State<ChatScreen> {
       title: Align(
         alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             color: isMe ? Colors.blue : Colors.grey,
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Text(
             message['text'],
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),
@@ -77,13 +77,13 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: TextField(
               controller: _messageController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter your message...",
               ),
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             onPressed: _sendMessage,
           ),
         ],
@@ -106,7 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // Scroll to the bottom after sending a message
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
   }

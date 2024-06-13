@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:healthforall/screens/auth/sign_up_medic.dart';
 import 'package:healthforall/screens/auth/sign_up_screen.dart';
 class SelectTypeUser extends StatelessWidget {
+  const SelectTypeUser({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class SelectTypeUser extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Who are you?",
                       style: TextStyle(
                           color: Colors.black,
@@ -38,17 +40,17 @@ class SelectTypeUser extends StatelessWidget {
                             builder: (context) => SignUpScreen(),
                           ),
                         ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        backgroundColor: const Color(0xFF6CD8D1),
+                      ),
                         // Handle button 1 press
 
-                      child: Text("Patient",
+                      child: const Text("Patient",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 50),
-                        backgroundColor: Color(0xFF6CD8D1),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -60,16 +62,16 @@ class SelectTypeUser extends StatelessWidget {
                             builder: (context) => SignUpMedic(),
                           ),
                         ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        backgroundColor: const Color(0xfffea41d),
+                      ),
 
-                      child: Text("Doctor",
+                      child: const Text("Doctor",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 50),
-                        backgroundColor: Color(0xfffea41d),
                       ),
                     ),
                   ],

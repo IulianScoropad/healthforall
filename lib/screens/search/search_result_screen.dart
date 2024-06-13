@@ -5,7 +5,6 @@ import 'package:healthforall/components/section_title.dart';
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/controllers.dart';
 import 'package:healthforall/models/AvailableDoctor.dart';
-import 'package:healthforall/models/SearchDoctor.dart';
 import 'package:healthforall/screens/details/doctor_details_screen.dart';
 import 'package:healthforall/screens/home/components/available_doctors.dart';
 
@@ -15,7 +14,7 @@ import 'components/search_doctor_card.dart';
 
 
 class SearchResultScreen extends StatefulWidget {
-  const SearchResultScreen({Key? key}) : super(key: key);
+  const SearchResultScreen({super.key});
 
   @override
   _SearchResultScreenState createState() => _SearchResultScreenState();
@@ -29,7 +28,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     super.initState();
     DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
     _query = databaseReference.child('Doctors').orderByChild('region').equalTo(globalSelectedRegion);
-  //  _query = _query.orderByChild('categorie').equalTo(globalSelectedCategory);
+
   }
 
   @override
@@ -42,7 +41,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               "Selected area",
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            Text("Boston"),
+            Text(globalSelectedRegion ?? " "),
           ],
         ),
         actions: [
@@ -61,14 +60,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 child: Column(
                   children: [
                     SectionTitle(
-                      title: "All Cardiologist",
+                      title: "All Doctors",
                       pressOnSeeAll: () {},
                     ),
                     StreamBuilder(
                       stream: _query.onValue,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         }
 
                         if (snapshot.hasError) {
@@ -76,7 +75,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         }
 
                         if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-                          return Text('No data available');
+                          return const Text('No data available');
                         }
 
                         Map<dynamic, dynamic> values = snapshot.data!.snapshot.value;
@@ -87,12 +86,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
                         return Column(
                           children: searchDoctors.map((doctor) => SearchDoctorCard(
-                            info: SearchDoctor(
+                            info: AvailableDoctor(
                               image: doctor.image,
-                              name: doctor.username,
-                              speciality: doctor.experience,
+                              username: doctor.username,
+                              categorie: doctor.experience,
                               time: doctor.time,
-                              hospitalName: doctor.hospitalname,
+                              hospitalname: doctor.hospitalname, key: '',
                             ),
                             press: () => Navigator.push(
                               context,
@@ -107,7 +106,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   ],
                 ),
               ),
-              AvailableDoctors(),
+              const AvailableDoctors(),
             ],
           ),
         ),

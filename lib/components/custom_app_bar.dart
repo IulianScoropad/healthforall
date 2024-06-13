@@ -8,10 +8,10 @@ class CustomAppBar extends StatelessWidget {
 
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.text,
     required this.title,
-  }) : super(key: key);
+  });
 
   final String text, title;
 
@@ -36,12 +36,12 @@ class CustomAppBar extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           IconButton(
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SearchScreen(),
+                builder: (context) => const SearchScreen(),
               ),
             ),
             icon: SvgPicture.asset("assets/icons/Serach.svg"),

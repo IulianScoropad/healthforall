@@ -5,20 +5,20 @@ import '../../../models/RecommendDoctor.dart';
 
 class RecommendDoctorCard extends StatelessWidget {
   const RecommendDoctorCard({
-    Key? key,
+    super.key,
     required this.doctor,
-  }) : super(key: key);
+  });
 
   final RecommendedDoctor doctor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+      margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: primaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(defaultPadding)),
+      decoration: const BoxDecoration(
+        color: Color(0xfffea41d),
+        borderRadius: BorderRadius.all(Radius.circular(defaultPadding)),
       ),
       child: Row(
         children: [
@@ -35,12 +35,12 @@ class RecommendDoctorCard extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: defaultPadding / 2),
+                      margin: const EdgeInsets.only(right: defaultPadding / 2),
                       width: 2,
                       height: 48,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xFF83D047),
-                        borderRadius: const BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                             Radius.circular(defaultPadding)),
                       ),
                     ),
@@ -49,12 +49,12 @@ class RecommendDoctorCard extends StatelessWidget {
                       children: [
                         Text(
                           doctor.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         Text(
-                          doctor.speciality + "\n" + doctor.institute,
-                          style: TextStyle(color: Colors.white),
+                          "${doctor.speciality}\n${doctor.institute}",
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     )

@@ -4,10 +4,10 @@ import '../constants.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
-    Key? key,
+    super.key,
     required this.title,
     required this.pressOnSeeAll,
-  }) : super(key: key);
+  });
 
   final String title;
   final VoidCallback pressOnSeeAll;
@@ -23,7 +23,7 @@ class SectionTitle extends StatelessWidget {
         ),
         TextButton(
           onPressed: pressOnSeeAll,
-          child: Text(
+          child: const Text(
             "See All",
             style: TextStyle(color: textColor),
           ),

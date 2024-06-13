@@ -1,18 +1,15 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:healthforall/controllers.dart';
 
 import '../../constants.dart';
-import 'package:healthforall/screens/home/home_screen.dart';
 import 'package:healthforall/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'cpmponents/calendar.dart';
 
 class AppointmentScreen extends StatefulWidget {
 
 
-  const AppointmentScreen({Key? key}) : super(key: key);
+  const AppointmentScreen({super.key});
 
   @override
   _AppointmentScreenState createState() => _AppointmentScreenState();
@@ -40,7 +37,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Appointment"),
+        title: const Text("Appointment"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +59,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             child: GridView.builder(
               shrinkWrap: true,
               itemCount: 5,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 2.77,
                 mainAxisSpacing: defaultPadding,
@@ -79,7 +76,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   decoration: BoxDecoration(
                     color:
                         selectedSloats == index ? primaryColor : Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
                   ),
                   child: Text(
                     sloats[index],
@@ -105,7 +102,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               //    "${selectedDate.toIso8601String().split('T').first} ${selectedTime}",
              //   );
 
-                final appointmentDateTime = selectedDate.day.toString() +  '/' + selectedDate.month.toString() + '/' + selectedDate.year.toString() + ' , ' + selectedTime;
+                final appointmentDateTime = '${selectedDate.day}/${selectedDate.month}/${selectedDate.year} , $selectedTime';
 
                 final appointment = Appointment(
                   doctorUID: doctor,
@@ -117,12 +114,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MainScreen(),
+                    builder: (context) => const MainScreen(),
                   ),
                 );
 
               },
-              child: Text("Confirm  Appoinment"),
+              child: const Text("Confirm  Appoinment"),
             ),
           ),
         ],

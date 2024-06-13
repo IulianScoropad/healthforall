@@ -6,12 +6,12 @@ import 'package:healthforall/screens/appointment/appointment_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../controllers.dart';
-import '../../models/SearchDoctor.dart';
+//import '../../models/SearchDoctor.dart';
 import 'components/communication.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final AvailableDoctor doctor;
- const  DoctorDetailsScreen({Key? key, required this.doctor}) : super(key: key);
+ const  DoctorDetailsScreen({super.key, required this.doctor});
 
 
 
@@ -20,17 +20,17 @@ class DoctorDetailsScreen extends StatelessWidget {
     doctorID = doctor.key.toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dr." + (doctor.username  ?? "") + (doctorID ?? "")),
+        title: Text("Dr.${doctor.username  ?? ""}"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("assets/images/doctor_big_preview.png"),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+              Image.asset("assets/images/doctor_photo_big.png"),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: defaultPadding),
                 child: Communication(),
               ),
               Text(
@@ -38,14 +38,14 @@ class DoctorDetailsScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(doctor.hospitalname ?? ""),
-              Padding(
+              const Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding / 4),
+                    EdgeInsets.symmetric(vertical: defaultPadding / 4),
                 child: Rating(score: 5),
               ),
-              SizedBox(height: defaultPadding),
+              const SizedBox(height: defaultPadding),
               Text(
-                "About"+ (doctor.username ?? " "),
+                "About${doctor.username ?? " "}",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Padding(
@@ -66,9 +66,9 @@ class DoctorDetailsScreen extends StatelessWidget {
                     ),
                     Highlight(
                       name: "Experience",
-                      text: (doctor.experience ?? "") + "Years" ,
+                      text: "${doctor.experience ?? ""}Years" ,
                     ),
-                    Highlight(
+                    const Highlight(
                       name: "Reviews",
                       text: "2.05K",
                     ),
@@ -85,12 +85,13 @@ class DoctorDetailsScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            AppointmentScreen(),
+                            const AppointmentScreen(),
                       ),
-                    )
-                    ,
-
-                  child: Text("Book an Appoinment"),
+                    ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xFF6CD8D1),
+                  ),
+                  child: const Text("Book an Appoinment"),
                 ),
               ),
             ],

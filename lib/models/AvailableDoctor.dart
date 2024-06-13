@@ -1,6 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class AvailableDoctor {
   final String? key, username,experience, time, region, phone, numarpacienti, mail, hospitalname, categorie, adresa, despre, image;
@@ -29,17 +26,17 @@ class AvailableDoctor {
 
     return AvailableDoctor(
       key: key,
-      username: data?['username'],
-      region: data?['region'],
-      experience: data?['experienceyears'],
-      numarpacienti: data?['numberpatienti'],
-      time: data?['time'],
-      phone: data?['phone'],
-      mail: data?['mail'],
-      hospitalname: data?['hospitalname'],
-      adresa: data?['adress'],
-      despre: data?['about'],
-      image: "assets/images/Serena_Gome.png",
+      username: data['username'],
+      region: data['region'],
+      experience: data['experienceyears'],
+      numarpacienti: data['numberpatienti'],
+      time: data['time'],
+      phone: data['phone'],
+      mail: data['mail'],
+      hospitalname: data['hospitalname'],
+      adresa: data['adress'],
+      despre: data['about'],
+      image: "assets/images/doctor_photo.png",
       categorie: "category"
     );
   }

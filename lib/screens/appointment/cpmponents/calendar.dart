@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Calendar extends StatefulWidget {
   final Function(DateTime) onDateSelected;
-  const Calendar({Key? key, required this.onDateSelected}) : super(key: key);
+  const Calendar({super.key, required this.onDateSelected});
   @override
   _CalendarState createState() => _CalendarState();
 }
@@ -47,7 +47,7 @@ class _CalendarState extends State<Calendar> {
           height: 80,
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(width: defaultPadding);
+              return const SizedBox(width: defaultPadding);
             },
             itemCount: 10,
             scrollDirection: Axis.horizontal,
@@ -85,7 +85,7 @@ class _CalendarState extends State<Calendar> {
                               : textColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(

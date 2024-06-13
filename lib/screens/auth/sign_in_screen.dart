@@ -1,7 +1,6 @@
 import 'package:healthforall/screens/auth/select_type_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:healthforall/screens/home/home_screen.dart';
 import 'package:healthforall/screens/main/main_screen.dart';
 import '../../constants.dart';
 import 'components/sign_in_form.dart';
@@ -10,11 +9,13 @@ import '../../../controllers.dart';
 import 'package:healthforall/screens/home/home_screen_doctor.dart';
 
 class SignInScreen extends StatelessWidget {
-  // It's time to validat the text field
+
   final _formKey = GlobalKey<FormState>();
   String errorMessage = '';
   String userId = '';
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+
+  SignInScreen({super.key});
 
   Future<void> login(BuildContext context, String email, String password) async{
     final String email = editMaileController.text.trim();
@@ -33,13 +34,9 @@ class SignInScreen extends StatelessWidget {
         foundUser = true;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
+        MaterialPageRoute(builder: (context) => const MainScreen()),
        );
-      //  Navigator.pushNamed(
-      //    context,
-       //   MainScreen.routeName,
-       //   arguments: userId,
-       // );
+
       } else{
           errorMessage ='Incorrect password';
 
@@ -49,9 +46,8 @@ class SignInScreen extends StatelessWidget {
       errorMessage = 'Incorrect password';
     }
       } else {
-        // Search in 'Doctori' table
-        value =
-        await dbRef.child('Doctors').orderByChild('mail').equalTo(email).once();
+
+        value = await dbRef.child('Doctors').orderByChild('mail').equalTo(email).once();
         snapshot = value.snapshot;
         if (snapshot.value != null) {
           Map<dynamic, dynamic> doctori = snapshot.value as Map<dynamic,
@@ -63,13 +59,9 @@ class SignInScreen extends StatelessWidget {
               foundUser = true;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreenDoctor() ),
+                MaterialPageRoute(builder: (context) => const HomeScreenDoctor() ),
               );
-              // Navigator.pushNamed(
-              //   context,
-              //   MainScreen.routeName,
-              //   arguments: userId,
-              // );
+
             } else {
               errorMessage = 'Incorrect password';
             }
@@ -88,7 +80,7 @@ class SignInScreen extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    // But still same problem, let's fixed it
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -97,7 +89,7 @@ class SignInScreen extends StatelessWidget {
           SvgPicture.asset(
             "assets/icons/Sign_Up_bg.svg",
             height: MediaQuery.of(context).size.height,
-            // Now it takes 100% of our height
+
           ),
           Padding(
             padding:
@@ -117,15 +109,15 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text("Don't have an account?"),
+                        const Text("Don't have an account?"),
                         TextButton(
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SelectTypeUser(),
+                              builder: (context) => const SelectTypeUser(),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             "Sign Up!",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -139,19 +131,18 @@ class SignInScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          //if (_formKey.currentState!.validate()) {
                             login(context, editMaileController.text.trim(), editPasswordController.text.trim());
-                           // _formKey.currentState!.save();
-                            //  Sign in also done
-                         // }
                         },
-                        child: Text("Sign In"),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFF6CD8D1),
+                          ),
+                        child: const Text("Sign In"),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       errorMessage,
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   ],
                 ),

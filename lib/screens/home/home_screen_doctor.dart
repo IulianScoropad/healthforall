@@ -8,7 +8,7 @@ import '../../constants.dart';
 import '../../controllers.dart';
 
 class HomeScreenDoctor extends StatefulWidget {
-  const HomeScreenDoctor({Key? key}) : super(key: key);
+  const HomeScreenDoctor({super.key});
 
   @override
   _HomeScreenDoctor createState() => _HomeScreenDoctor();
@@ -70,20 +70,20 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Appointments"),
+        title: const Text("My Appointments"),
       ),
       body: FutureBuilder<List<AppointmentPatience>>(
         future: _fetchAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No appointments found"));
+            return const Center(child: Text("No appointments found"));
           } else {
             return SingleChildScrollView(
-              padding: EdgeInsets.all(defaultPadding),
+              padding: const EdgeInsets.all(defaultPadding),
               child: Column(
                 children: snapshot.data!.map((appointment) => _buildAppointmentCard(appointment)).toList(),
               ),
@@ -96,9 +96,9 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
 
   Widget _buildAppointmentCard(AppointmentPatience appointment) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      margin: EdgeInsets.only(bottom: defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      margin: const EdgeInsets.only(bottom: defaultPadding),
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(defaultPadding / 2)),
       ),
@@ -115,7 +115,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
               ),
             ],
           ),
-          Divider(height: defaultPadding * 2),
+          const Divider(height: defaultPadding * 2),
           Row(
             children: [
               Expanded(
@@ -127,12 +127,12 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
               Expanded(
                 child: buildAppointmentInfo("Region", appointment.region),
               ),
-              SizedBox(width: defaultPadding / 2),
+              const SizedBox(width: defaultPadding / 2),
               Expanded(
                 child: ElevatedButton.icon(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor: Color(0xFFFBA351).withOpacity(0.75),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: const Color(0xFFFBA351).withOpacity(0.75),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -148,7 +148,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
                     color: Colors.white,
                     width: 11,
                   ),
-                  label: Text("Message"),
+                  label: const Text("Message"),
                 ),
               ),
             ],
@@ -172,7 +172,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
         Text(
           text,
           maxLines: 1,
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ],
     );
@@ -181,7 +181,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
 
   String getChatId(String doctorId, String userId) {
     // Generate a chat ID based on doctorId and userId
-    return doctorId + '_' + userId;
+    return '${doctorId}_$userId';
   }
 
 

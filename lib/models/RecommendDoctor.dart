@@ -27,7 +27,7 @@ class RecommendedDoctorService {
           String name = value['username'];
           String speciality = value['category'];
           String institute = value['hospitalname'];
-          String image = "assets/images/Serena_Gome.png";
+          String image = "assets/images/doctor_photo.png";
           String experienceAsString = value['experienceyears'];
            // Experiența ca șir de caractere
           int experience = int.parse(experienceAsString);

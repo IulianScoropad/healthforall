@@ -1,0 +1,520 @@
+@startuml
+set namespaceSeparator ::
+
+class "healthforall::chat::chat.dart::ChatScreen" {
+  +String chatId
+  +String userId
+  +_ChatScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::chat::chat.dart::ChatScreen"
+
+class "healthforall::chat::chat.dart::_ChatScreenState" {
+  -TextEditingController _messageController
+  -ScrollController _scrollController
+  -DatabaseReference _databaseReference
+  +Widget build()
+  -Widget _buildMessageItem()
+  -Widget _buildMessageInput()
+  -dynamic _sendMessage()
+}
+
+"healthforall::chat::chat.dart::_ChatScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"healthforall::chat::chat.dart::_ChatScreenState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"healthforall::chat::chat.dart::_ChatScreenState" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::chat::chat.dart::_ChatScreenState"
+
+class "healthforall::components::available_doctor_card.dart::AvailableDoctorCard" {
+  +AvailableDoctor info
+  +Widget build()
+}
+
+"healthforall::components::available_doctor_card.dart::AvailableDoctorCard" o-- "healthforall::models::AvailableDoctor.dart::AvailableDoctor"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::components::available_doctor_card.dart::AvailableDoctorCard"
+
+class "healthforall::components::custom_app_bar.dart::CustomAppBar" {
+  +String text
+  +String title
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::components::custom_app_bar.dart::CustomAppBar"
+
+class "healthforall::components::heightlight.dart::Highlight" {
+  +String name
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::components::heightlight.dart::Highlight"
+
+class "healthforall::components::rating.dart::Rating" {
+  +int score
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::components::rating.dart::Rating"
+
+class "healthforall::components::section_title.dart::SectionTitle" {
+  +String title
+  +void Function() pressOnSeeAll
+  +Widget build()
+}
+
+"healthforall::components::section_title.dart::SectionTitle" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::components::section_title.dart::SectionTitle"
+
+class "healthforall::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::main.dart::MyApp"
+
+class "healthforall::models::AvailableDoctor.dart::AvailableDoctor" {
+  +String? key
+  +String? username
+  +String? experience
+  +String? time
+  +String? region
+  +String? phone
+  +String? numarpacienti
+  +String? mail
+  +String? hospitalname
+  +String? categorie
+  +String? adresa
+  +String? despre
+  +String? image
+}
+
+class "healthforall::models::Category.dart::Category" {
+  +String icon
+  +String title
+}
+
+class "healthforall::models::DoctorProvider.dart::DoctorProvider" {
+  {static} +dynamic fetchDoctors()
+}
+
+class "healthforall::models::RecommendDoctor.dart::RecommendedDoctor" {
+  +String name
+  +String speciality
+  +String institute
+  +String image
+}
+
+class "healthforall::models::RecommendDoctor.dart::RecommendedDoctorService" {
+  -DatabaseReference _database
+  +dynamic getRecommendedDoctors()
+}
+
+"healthforall::models::RecommendDoctor.dart::RecommendedDoctorService" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+
+class "healthforall::screens::appointment::appointment_screen.dart::AppointmentScreen" {
+  +_AppointmentScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::appointment::appointment_screen.dart::AppointmentScreen"
+
+class "healthforall::screens::appointment::appointment_screen.dart::_AppointmentScreenState" {
+  +List<String> sloats
+  +DateTime selectedDate
+  +int selectedSloats
+  +dynamic saveAppointment()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::appointment::appointment_screen.dart::_AppointmentScreenState"
+
+class "healthforall::screens::appointment::appointment_screen.dart::Appointment" {
+  +String doctorUID
+  +String patientId
+  +String dateTime
+  +Map<String, dynamic> toMap()
+}
+
+class "healthforall::screens::appointment::cpmponents::appointement.dart::Appointment" {
+  +String id
+  +String userId
+  +String doctorId
+  +String date
+  +String doctorName
+  +String type
+  +String place
+}
+
+class "healthforall::screens::appointment::cpmponents::calendar.dart::Calendar" {
+  +dynamic Function(DateTime) onDateSelected
+  +_CalendarState createState()
+}
+
+"healthforall::screens::appointment::cpmponents::calendar.dart::Calendar" o-- "null::dynamic Function(DateTime)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::appointment::cpmponents::calendar.dart::Calendar"
+
+class "healthforall::screens::appointment::cpmponents::calendar.dart::_CalendarState" {
+  +DateTime selectedDate
+  +int currentDateSelectedIndex
+  +List<String> listOfMonths
+  +List<String> listOfDays
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::appointment::cpmponents::calendar.dart::_CalendarState"
+
+class "healthforall::screens::appointment::my_appointment_screen.dart::MyAppointmentScreen" {
+  +_MyAppointmentScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::appointment::my_appointment_screen.dart::MyAppointmentScreen"
+
+class "healthforall::screens::appointment::my_appointment_screen.dart::_MyAppointmentScreenState" {
+  -dynamic _fetchAppointments()
+  +dynamic getDoctorDetails()
+  -dynamic _deleteAppointment()
+  +Widget build()
+  -Widget _buildAppointmentCard()
+  +Column buildAppointmentInfo()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::appointment::my_appointment_screen.dart::_MyAppointmentScreenState"
+
+class "healthforall::screens::auth::components::sign_in_form.dart::SignInForm" {
+  +GlobalKey<State<StatefulWidget>> formKey
+  +Widget build()
+}
+
+"healthforall::screens::auth::components::sign_in_form.dart::SignInForm" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::components::sign_in_form.dart::SignInForm"
+
+class "healthforall::screens::auth::components::sign_up_form.dart::DropdownController" {
+  -ValueNotifier<String> _valueNotifier
+  +String value
+  +ValueNotifier<String> notifier
+}
+
+"healthforall::screens::auth::components::sign_up_form.dart::DropdownController" o-- "flutter::src::foundation::change_notifier.dart::ValueNotifier<String>"
+
+class "healthforall::screens::auth::components::sign_up_form.dart::SignUpForm" {
+  +GlobalKey<State<StatefulWidget>> formKey
+  +DropdownController dropdownController
+  -String _userName
+  -String _email
+  -String _password
+  -String _phoneNumber
+  +Widget build()
+}
+
+"healthforall::screens::auth::components::sign_up_form.dart::SignUpForm" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"healthforall::screens::auth::components::sign_up_form.dart::SignUpForm" o-- "healthforall::screens::auth::components::sign_up_form.dart::DropdownController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::components::sign_up_form.dart::SignUpForm"
+
+class "healthforall::screens::auth::components::sign_up_form.dart::TextFieldName" {
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::components::sign_up_form.dart::TextFieldName"
+
+class "healthforall::screens::auth::components::sign_up_medic_form.dart::DropdownController" {
+  -ValueNotifier<String> _valueNotifier
+  +String value
+  +ValueNotifier<String> notifier
+}
+
+"healthforall::screens::auth::components::sign_up_medic_form.dart::DropdownController" o-- "flutter::src::foundation::change_notifier.dart::ValueNotifier<String>"
+
+class "healthforall::screens::auth::components::sign_up_medic_form.dart::SignUpMedicFrom" {
+  +GlobalKey<State<StatefulWidget>> formKey
+  +DropdownController dropdownController
+  +DropdownController dropdownControllerMedic
+  -String _userName
+  -String _email
+  -String _password
+  -String _phoneNumber
+  +Widget build()
+}
+
+"healthforall::screens::auth::components::sign_up_medic_form.dart::SignUpMedicFrom" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"healthforall::screens::auth::components::sign_up_medic_form.dart::SignUpMedicFrom" o-- "healthforall::screens::auth::components::sign_up_medic_form.dart::DropdownController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::components::sign_up_medic_form.dart::SignUpMedicFrom"
+
+class "healthforall::screens::auth::components::sign_up_medic_form.dart::TextFieldName" {
+  +String text
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::components::sign_up_medic_form.dart::TextFieldName"
+
+class "healthforall::screens::auth::select_type_user.dart::SelectTypeUser" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::select_type_user.dart::SelectTypeUser"
+
+class "healthforall::screens::auth::sign_in_screen.dart::SignInScreen" {
+  -GlobalKey<FormState> _formKey
+  +String errorMessage
+  +String userId
+  +DatabaseReference dbRef
+  +dynamic login()
+  +Widget build()
+}
+
+"healthforall::screens::auth::sign_in_screen.dart::SignInScreen" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"healthforall::screens::auth::sign_in_screen.dart::SignInScreen" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::sign_in_screen.dart::SignInScreen"
+
+class "healthforall::screens::auth::sign_up_medic.dart::SignUpMedic" {
+  -GlobalKey<FormState> _formKey
+  +DatabaseReference dbRef
+  +Widget build()
+}
+
+"healthforall::screens::auth::sign_up_medic.dart::SignUpMedic" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"healthforall::screens::auth::sign_up_medic.dart::SignUpMedic" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::sign_up_medic.dart::SignUpMedic"
+
+class "healthforall::screens::auth::sign_up_screen.dart::SignUpScreen" {
+  -GlobalKey<FormState> _formKey
+  +DatabaseReference dbRef
+  +Widget build()
+}
+
+"healthforall::screens::auth::sign_up_screen.dart::SignUpScreen" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"healthforall::screens::auth::sign_up_screen.dart::SignUpScreen" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::auth::sign_up_screen.dart::SignUpScreen"
+
+class "healthforall::screens::details::components::communication.dart::Communication" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::details::components::communication.dart::Communication"
+
+class "healthforall::screens::details::doctor_details_screen.dart::DoctorDetailsScreen" {
+  +AvailableDoctor doctor
+  +Widget build()
+}
+
+"healthforall::screens::details::doctor_details_screen.dart::DoctorDetailsScreen" o-- "healthforall::models::AvailableDoctor.dart::AvailableDoctor"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::details::doctor_details_screen.dart::DoctorDetailsScreen"
+
+class "healthforall::screens::doctors::components::docotor_card.dart::DoctorCard" {
+  +AvailableDoctor doctor
+  +void Function() press
+  +Widget build()
+}
+
+"healthforall::screens::doctors::components::docotor_card.dart::DoctorCard" o-- "healthforall::models::AvailableDoctor.dart::AvailableDoctor"
+"healthforall::screens::doctors::components::docotor_card.dart::DoctorCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::doctors::components::docotor_card.dart::DoctorCard"
+
+class "healthforall::screens::doctors::doctors_screen.dart::DoctorsScreen" {
+  +_DoctorsScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::doctors::doctors_screen.dart::DoctorsScreen"
+
+class "healthforall::screens::doctors::doctors_screen.dart::_DoctorsScreenState" {
+  +dynamic futureDoctors
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::doctors::doctors_screen.dart::_DoctorsScreenState"
+
+class "healthforall::screens::home::components::appointment_card_doctor.dart::AppointmentPatience" {
+  +String id
+  +String userId
+  +String doctorId
+  +String date
+  +String patienceName
+  +String phone
+  +String region
+  +String adress
+}
+
+class "healthforall::screens::home::components::available_doctors.dart::AvailableDoctors" {
+  +_AvailableDoctorsState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::home::components::available_doctors.dart::AvailableDoctors"
+
+class "healthforall::screens::home::components::available_doctors.dart::_AvailableDoctorsState" {
+  +dynamic futureDoctors
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::home::components::available_doctors.dart::_AvailableDoctorsState"
+
+class "healthforall::screens::home::components::categories.dart::Categories" {
+  +List<AvailableDoctor> doctors
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::components::categories.dart::Categories"
+
+class "healthforall::screens::home::components::categories.dart::CategoryCard" {
+  +Category category
+  +List<AvailableDoctor> doctors
+  +Widget build()
+}
+
+"healthforall::screens::home::components::categories.dart::CategoryCard" o-- "healthforall::models::Category.dart::Category"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::components::categories.dart::CategoryCard"
+
+class "healthforall::screens::home::components::categories.dart::DoctorsInCategoryScreen" {
+  +List<AvailableDoctor> doctors
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::components::categories.dart::DoctorsInCategoryScreen"
+
+class "healthforall::screens::home::components::recommended_doctors.dart::RecommendedDoctors" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::components::recommended_doctors.dart::RecommendedDoctors"
+
+class "healthforall::screens::home::components::recommended_doctor_card.dart::RecommendDoctorCard" {
+  +RecommendedDoctor doctor
+  +Widget build()
+}
+
+"healthforall::screens::home::components::recommended_doctor_card.dart::RecommendDoctorCard" o-- "healthforall::models::RecommendDoctor.dart::RecommendedDoctor"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::components::recommended_doctor_card.dart::RecommendDoctorCard"
+
+class "healthforall::screens::home::home_screen.dart::HomePage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home::home_screen.dart::HomePage"
+
+class "healthforall::screens::home::home_screen_doctor.dart::HomeScreenDoctor" {
+  +_HomeScreenDoctor createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::home::home_screen_doctor.dart::HomeScreenDoctor"
+
+class "healthforall::screens::home::home_screen_doctor.dart::_HomeScreenDoctor" {
+  -dynamic _fetchAppointments()
+  +dynamic getPacientDetails()
+  -dynamic _deleteAppointment()
+  +Widget build()
+  -Widget _buildAppointmentCard()
+  +Column buildAppointmentInfo()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::home::home_screen_doctor.dart::_HomeScreenDoctor"
+
+class "healthforall::screens::home.dart::Home" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::home.dart::Home"
+
+class "healthforall::screens::main::main_screen.dart::MainScreen" {
+  {static} +String routeName
+  +_MainScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::main::main_screen.dart::MainScreen"
+
+class "healthforall::screens::main::main_screen.dart::_MainScreenState" {
+  -List<Widget> _pages
+  -int _selectedPage
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::main::main_screen.dart::_MainScreenState"
+
+class "healthforall::screens::profile::profile_screen.dart::ProfileScreen" {
+  +DatabaseReference dbRef
+  +_ProfileScreenState createState()
+}
+
+"healthforall::screens::profile::profile_screen.dart::ProfileScreen" o-- "firebase_database::firebase_database.dart::DatabaseReference"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::profile::profile_screen.dart::ProfileScreen"
+
+class "healthforall::screens::profile::profile_screen.dart::_ProfileScreenState" {
+  -String _name
+  -String _email
+  -String _phoneNumber
+  -String _address
+  -String _region
+  -bool _isLoading
+  +void initState()
+  +dynamic fetchUserData()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::profile::profile_screen.dart::_ProfileScreenState"
+
+class "healthforall::screens::search::components::search_doctor_card.dart::SearchDoctorCard" {
+  +AvailableDoctor info
+  +void Function() press
+  +Widget build()
+}
+
+"healthforall::screens::search::components::search_doctor_card.dart::SearchDoctorCard" o-- "healthforall::models::AvailableDoctor.dart::AvailableDoctor"
+"healthforall::screens::search::components::search_doctor_card.dart::SearchDoctorCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::search::components::search_doctor_card.dart::SearchDoctorCard"
+
+class "healthforall::screens::search::components::search_form.dart::SearchForm" {
+  +_SearchFormState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::search::components::search_form.dart::SearchForm"
+
+class "healthforall::screens::search::components::search_form.dart::_SearchFormState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::search::components::search_form.dart::_SearchFormState"
+
+class "healthforall::screens::search::search_result_screen.dart::SearchResultScreen" {
+  +_SearchResultScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "healthforall::screens::search::search_result_screen.dart::SearchResultScreen"
+
+class "healthforall::screens::search::search_result_screen.dart::_SearchResultScreenState" {
+  -Query _query
+  +void initState()
+  +Widget build()
+}
+
+"healthforall::screens::search::search_result_screen.dart::_SearchResultScreenState" o-- "firebase_database::firebase_database.dart::Query"
+"flutter::src::widgets::framework.dart::State" <|-- "healthforall::screens::search::search_result_screen.dart::_SearchResultScreenState"
+
+class "healthforall::screens::search::search_screen.dart::SearchScreen" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::search::search_screen.dart::SearchScreen"
+
+class "healthforall::screens::settings::components::setting_item_caed.dart::SettingTab" {
+  +String? text
+  +String? iconSrc
+  +bool value
+  +void Function(bool) onChanged
+  +Widget build()
+}
+
+"healthforall::screens::settings::components::setting_item_caed.dart::SettingTab" o-- "flutter::src::foundation::basic_types.dart::void Function(bool)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::settings::components::setting_item_caed.dart::SettingTab"
+
+class "healthforall::screens::settings::settings_screen.dart::SettingsScreen" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::settings::settings_screen.dart::SettingsScreen"
+
+class "healthforall::screens::welcome::welcome_screen.dart::WelcomeScreen" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "healthforall::screens::welcome::welcome_screen.dart::WelcomeScreen"
+
+
+@enduml

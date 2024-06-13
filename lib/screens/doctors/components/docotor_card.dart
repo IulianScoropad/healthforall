@@ -2,14 +2,13 @@ import 'package:healthforall/models/AvailableDoctor.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../controllers.dart';
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({
-    Key? key,
+    super.key,
     required this.doctor,
     required this.press,
-  }) : super(key: key);
+  });
 
   final AvailableDoctor doctor;
   final VoidCallback press;
@@ -20,10 +19,10 @@ class DoctorCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        padding: EdgeInsets.all(defaultPadding),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(defaultPadding),
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
         ),
@@ -35,18 +34,18 @@ class DoctorCard extends StatelessWidget {
                 children: [
                   Text(
                     doctor.username!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: defaultPadding / 4),
+                  const SizedBox(height: defaultPadding / 4),
                   Text(
                     doctor.region!,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  Spacer(),
-                  Text(
+                  const Spacer(),
+                  const Text(
                     "Experience",
                     style: TextStyle(
                       fontSize: 10,
@@ -54,13 +53,13 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Text(
                     "${doctor.experience} Years",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
-                  Text(
+                  const Spacer(),
+                  const Text(
                     "Patients",
                     style: TextStyle(
                       fontSize: 10,
@@ -68,7 +67,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Text(
                     doctor.numarpacienti!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),

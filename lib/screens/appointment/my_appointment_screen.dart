@@ -6,7 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 
 class MyAppointmentScreen extends StatefulWidget {
-  const MyAppointmentScreen({Key? key}) : super(key: key);
+  const MyAppointmentScreen({super.key});
 
   @override
   _MyAppointmentScreenState createState() => _MyAppointmentScreenState();
@@ -66,20 +66,20 @@ class MyAppointmentScreen extends StatefulWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Appointments"),
+        title: const Text("My Appointments"),
       ),
       body: FutureBuilder<List<Appointment>>(
         future: _fetchAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No appointments found"));
+            return const Center(child: Text("No appointments found"));
           } else {
             return SingleChildScrollView(
-              padding: EdgeInsets.all(defaultPadding),
+              padding: const EdgeInsets.all(defaultPadding),
               child: Column(
                 children: snapshot.data!.map((appointment) => _buildAppointmentCard(appointment)).toList(),
               ),
@@ -92,9 +92,9 @@ class MyAppointmentScreen extends StatefulWidget {
 
   Widget _buildAppointmentCard(Appointment appointment) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      margin: EdgeInsets.only(bottom: defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      margin: const EdgeInsets.only(bottom: defaultPadding),
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(defaultPadding / 2)),
       ),
@@ -111,7 +111,7 @@ class MyAppointmentScreen extends StatefulWidget {
               ),
             ],
           ),
-          Divider(height: defaultPadding * 2),
+          const Divider(height: defaultPadding * 2),
           Row(
             children: [
               Expanded(
@@ -129,7 +129,7 @@ class MyAppointmentScreen extends StatefulWidget {
                     await _deleteAppointment(appointment.id);
                   },
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
-                  child: Text("Cancel"),
+                  child: const Text("Cancel"),
                 ),
               ),
             ],
@@ -153,7 +153,7 @@ class MyAppointmentScreen extends StatefulWidget {
         Text(
           text,
           maxLines: 1,
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ],
     );

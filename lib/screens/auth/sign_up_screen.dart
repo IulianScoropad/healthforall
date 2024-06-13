@@ -1,18 +1,18 @@
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/screens/auth/sign_in_screen.dart';
-import 'package:healthforall/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import '../../../controllers.dart';
 import 'components/sign_up_form.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class SignUpScreen extends StatelessWidget {
-  // It's time to validat the text field
+
   final _formKey = GlobalKey<FormState>();
 
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+
+  SignUpScreen({super.key});
   @override
   Widget build(BuildContext context) {
     // But still same problem, let's fixed it
@@ -42,14 +42,14 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text("Already have an account?"),
+                        const Text("Already have an account?"),
                         TextButton(
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SignInScreen(),
                               )),
-                          child: Text(
+                          child: const Text(
                             "Sign In!",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -63,10 +63,6 @@ class SignUpScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                        //  if (_formKey.currentState!.validate()) {
-                            // Sign up form is done
-                            // It saved our inputs
-                            //_formKey.currentState!.save();
                             Map<String,dynamic> data = {
                               "username": editUserNameController.text.toString(),
                               "mail": editMaileController.text.toString(),
@@ -81,7 +77,10 @@ class SignUpScreen extends StatelessWidget {
                        //   }
 
                         },
-                        child: Text("Sign Up"),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xfffea41d),
+                          ),
+                        child: const Text("Sign Up"),
                       ),
                     ),
                   ],

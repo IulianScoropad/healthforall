@@ -10,9 +10,9 @@ class Categories extends StatelessWidget {
   final List<AvailableDoctor> doctors;
 
   const Categories({
-    Key? key,
+    super.key,
     required this.doctors,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +47,10 @@ class CategoryCard extends StatelessWidget {
   final List<AvailableDoctor> doctors;
 
   const CategoryCard({
-    Key? key,
+    super.key,
     required this.category,
     required this.doctors,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -69,23 +69,23 @@ class CategoryCard extends StatelessWidget {
         },
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Container(
-          padding: EdgeInsets.all(defaultPadding / 2),
+          padding: const EdgeInsets.all(defaultPadding / 2),
           height: 90,
           width: 90,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Colors.white,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(category.icon),
-              SizedBox(height: defaultPadding / 2),
+              const SizedBox(height: defaultPadding / 2),
               Text(
                 category.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),
@@ -102,15 +102,15 @@ class DoctorsInCategoryScreen extends StatelessWidget {
   final List<AvailableDoctor> doctors;
 
   const DoctorsInCategoryScreen({
-    Key? key,
+    super.key,
     required this.doctors,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Doctors in Category"),
+        title: const Text("Doctors in Category"),
       ),
       body: ListView.builder(
         itemCount: doctors.length,

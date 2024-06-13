@@ -2,15 +2,12 @@ import 'package:healthforall/controllers.dart';
 import 'package:healthforall/screens/search/search_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../../constants.dart';
 
-import 'package:flutter/material.dart';
-import 'package:healthforall/screens/search/search_result_screen.dart';
 
 class SearchForm extends StatefulWidget {
-  const SearchForm({Key? key}) : super(key: key);
+  const SearchForm({super.key});
 
   @override
   _SearchFormState createState() => _SearchFormState();
@@ -34,39 +31,18 @@ class _SearchFormState extends State<SearchForm> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                globalSelectedRegion = value as String?;
+                globalSelectedRegion = value;
               });
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: "Select Area",
             ),
           ),
-          DropdownButtonFormField(
-            icon: SvgPicture.asset(
-              "assets/icons/stethoscope.svg",
-              height: 17,
-              color: Color(0xFF677B92),
-            ),
-            items: categoryList.map<DropdownMenuItem<String>>((String category) {
-              return DropdownMenuItem(
-                value: category,
-                child: Text(category),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                globalSelectedCategory = value as String?;
-              });
-            },
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: "Select Category",
-            ),
-          ),
+          const SizedBox(height: defaultPadding * 2),
           ElevatedButton(
             onPressed: () async {
-              // Afisare calendar pentru selectarea datei
+
               final DateTime? pickedDate = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
@@ -80,23 +56,28 @@ class _SearchFormState extends State<SearchForm> {
                 });
               }
             },
-            child: Text("Select Date"),
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xfffea41d),
+            ),
+            child: const Text("Select Date"),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
+
+          const SizedBox(height: 50.0),
+             ElevatedButton(
               onPressed: () {
-                // Filtrare si navigare catre rezultatele cautarii
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchResultScreen(),
+                    builder: (context) => const SearchResultScreen(),
                   ),
                 );
               },
-              child: Text("Search"),
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFF6CD8D1),
+              ),
+              child: const Text("Search"),
             ),
-          ),
+
         ],
       ),
     );

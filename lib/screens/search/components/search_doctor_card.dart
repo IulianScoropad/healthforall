@@ -1,4 +1,5 @@
-import 'package:healthforall/models/SearchDoctor.dart';
+import 'package:healthforall/models/AvailableDoctor.dart';
+//import 'package:healthforall/models/SearchDoctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -6,25 +7,25 @@ import '../../../constants.dart';
 
 class SearchDoctorCard extends StatelessWidget {
   const SearchDoctorCard({
-    Key? key,
+    super.key,
     required this.info,
     required this.press,
-  }) : super(key: key);
+  });
 
-  final SearchDoctor info;
+  final AvailableDoctor info;
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: defaultPadding),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.only(bottom: defaultPadding),
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(defaultPadding)),
+        borderRadius: BorderRadius.all(Radius.circular(defaultPadding)),
       ),
       child: ListTile(
         onTap: press,
-        contentPadding: EdgeInsets.all(defaultPadding),
+        contentPadding: const EdgeInsets.all(defaultPadding),
         leading: AspectRatio(
           aspectRatio: 0.85,
           child: Image.asset(
@@ -35,7 +36,7 @@ class SearchDoctorCard extends StatelessWidget {
         title: Row(
           children: [
             Text(
-              info.name!,
+              info.username!,
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
@@ -46,7 +47,7 @@ class SearchDoctorCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: defaultPadding / 4),
               child: Text(
-                info.speciality!,
+                info.categorie!,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
@@ -74,7 +75,7 @@ class SearchDoctorCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    info.hospitalName!,
+                    info.hospitalname!,
                     maxLines: 1,
                     style: Theme.of(context)
                         .textTheme

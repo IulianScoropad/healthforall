@@ -1,6 +1,5 @@
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/screens/auth/sign_in_screen.dart';
-import 'package:healthforall/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:healthforall/screens/auth/select_type_user.dart';
@@ -8,7 +7,7 @@ import 'package:healthforall/screens/auth/select_type_user.dart';
 
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +21,13 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   SvgPicture.asset(
-                    "assets/icons/logo2-optimized.svg",
+                    "assets/icons/logo.svg",
                     height: 300,
                     width:300,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   // As you can see we need more paddind on our btn
                   SizedBox(
                     width: double.infinity,
@@ -36,13 +35,13 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectTypeUser(),
+                          builder: (context) => const SelectTypeUser(),
                         ),
                       ),
                       style: TextButton.styleFrom(
-                        backgroundColor: Color(0xfffea41d),
+                        backgroundColor: const Color(0xfffea41d),
                       ),
-                      child: Text(
+                      child: const Text(
                           "Registration",
                         style: TextStyle(
                             color: Colors.black,
@@ -64,9 +63,9 @@ class WelcomeScreen extends StatelessWidget {
                               builder: (context) => SignInScreen(),
                             )),
                         style: TextButton.styleFrom(
-                          backgroundColor: Color(0xFF6CD8D1),
+                          backgroundColor: const Color(0xFF6CD8D1),
                         ),
-                        child: Text(
+                        child: const Text(
                             "Login",
                         style: TextStyle(
                           color: Colors.black,

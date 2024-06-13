@@ -1,6 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import 'package:healthforall/screens/home/home_screen_doctor.dart';
 class AppointmentPatience {
   final String id;
   final String userId;

@@ -5,14 +5,14 @@ import '../../../constants.dart';
 import 'sign_up_form.dart';
 
 class SignInForm extends StatelessWidget {
-  SignInForm({
-    Key? key,
+  const SignInForm({
+    super.key,
     required this.formKey,
-  }) : super(key: key);
+  });
 
   final GlobalKey formKey;
 
-  //late String _email, _password;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +21,19 @@ class SignInForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFieldName(text: "Email"),
+          const TextFieldName(text: "Email"),
           TextFormField(
             controller: editMaileController,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(hintText: "test@email.com"),
-            validator: EmailValidator(errorText: "Use a valid email!"),
+            validator: EmailValidator(errorText: "Use a valid email!").call,
            // onSaved: (email) => _email = email!,
           ),
           const SizedBox(height: defaultPadding),
-          TextFieldName(text: "Password"),
+          const TextFieldName(text: "Password"),
           TextFormField(
             controller: editPasswordController,
             obscureText: true,
-            decoration: InputDecoration(hintText: "******"),
-            validator: passwordValidator,
-          //  onSaved: (password) => _password = password!,
+            validator: passwordValidator.call,
           ),
           const SizedBox(height: defaultPadding),
         ],

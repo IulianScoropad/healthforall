@@ -1,8 +1,6 @@
 import 'package:healthforall/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_database/firebase_animated_list.dart';
 import 'constants.dart';
 
 
@@ -17,10 +15,12 @@ void main() async {
       projectId: "health-app-71b25",
     ),
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: primaryColor,
-            padding: EdgeInsets.all(defaultPadding),
+            padding: const EdgeInsets.all(defaultPadding),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           focusedBorder: textFieldBorder,
         ),
       ),
-      home: WelcomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

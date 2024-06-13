@@ -1,22 +1,21 @@
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/screens/auth/sign_in_screen.dart';
-import 'package:healthforall/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import '../../../controllers.dart';
 import 'components/sign_up_medic_form.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class SignUpMedic extends StatelessWidget {
-  // It's time to validat the text field
+
 
   final _formKey = GlobalKey<FormState>();
 
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+
+  SignUpMedic({super.key});
   @override
   Widget build(BuildContext context) {
-    // But still same problem, let's fixed it
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -25,7 +24,6 @@ class SignUpMedic extends StatelessWidget {
           SvgPicture.asset(
             "assets/icons/Sign_Up_bg.svg",
             height: MediaQuery.of(context).size.height,
-            // Now it takes 100% of our height
           ),
           Center(
             child: SafeArea(
@@ -43,14 +41,14 @@ class SignUpMedic extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text("Already have an account?"),
+                        const Text("Already have an account?"),
                         TextButton(
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SignInScreen(),
                               )),
-                          child: Text(
+                          child: const Text(
                             "Sign In!",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -64,10 +62,7 @@ class SignUpMedic extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          //  if (_formKey.currentState!.validate()) {
-                          // Sign up form is done
-                          // It saved our inputs
-                          //_formKey.currentState!.save();
+
                           Map<String,dynamic> data = {
                             "username": editUserNameController.text.toString(),
                             "mail": editMaileController.text.toString(),
@@ -85,10 +80,10 @@ class SignUpMedic extends StatelessWidget {
                           dbRef.child("Doctors").push().set(data).then((value){
                             Navigator.of(context).pop();
                           });
-                          //   }
+
 
                         },
-                        child: Text("Sign Up"),
+                        child: const Text("Sign Up"),
                       ),
                     ),
                   ],

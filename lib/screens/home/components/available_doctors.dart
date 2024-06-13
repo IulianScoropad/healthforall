@@ -8,7 +8,7 @@ import 'package:healthforall/screens/doctors/doctors_screen.dart';
 
 class AvailableDoctors extends StatefulWidget {
 
-  const AvailableDoctors({Key? key}) : super(key: key);
+  const AvailableDoctors({super.key});
 
   @override
   _AvailableDoctorsState createState() => _AvailableDoctorsState();
@@ -34,7 +34,7 @@ class _AvailableDoctorsState extends State<AvailableDoctors> {
             pressOnSeeAll: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DoctorsScreen(),
+                builder: (context) => const DoctorsScreen(),
               ),
             ),
           ),
@@ -43,11 +43,11 @@ class _AvailableDoctorsState extends State<AvailableDoctors> {
           future: futureDoctors,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('No doctors found'));
+              return const Center(child: Text('No doctors found'));
             }
 
             List<AvailableDoctor> doctors = snapshot.data!;

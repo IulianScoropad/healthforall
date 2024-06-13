@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../controllers.dart';
 import 'recommended_doctor_card.dart';
 import '../../../models/RecommendDoctor.dart';
 
 class RecommendedDoctors extends StatelessWidget {
   const RecommendedDoctors({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class RecommendedDoctors extends StatelessWidget {
         future: RecommendedDoctorService().getRecommendedDoctors(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else if (snapshot.hasError) {
         return Center(child: Text('Error: ${snapshot.error}'));
       } else {

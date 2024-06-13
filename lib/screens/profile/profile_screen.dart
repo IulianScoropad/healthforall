@@ -1,5 +1,4 @@
 import 'package:healthforall/controllers.dart';
-
 import '../../constants.dart';
 import 'package:healthforall/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:firebase_database/firebase_database.dart';
 class ProfileScreen extends StatefulWidget {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
-   ProfileScreen({Key? key}) : super(key: key);
+   ProfileScreen({super.key});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -31,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> fetchUserData() async {
     try {
       final databaseReference = FirebaseDatabase.instance.reference();
-      DatabaseEvent event = await databaseReference.child('Pacienti/${globalUserId}').once();
+      DatabaseEvent event = await databaseReference.child('Pacienti/$globalUserId').once();
       DataSnapshot snapshot = event.snapshot;
       if (snapshot.value != null) {
         Map<String, dynamic> userData = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
@@ -56,16 +55,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
         actions: [
           IconButton(
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsScreen(),
+                builder: (context) => const SettingsScreen(),
               ),
             ),
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
               color: primaryColor,
             ),
@@ -73,21 +72,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
       body:  _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           :SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
             ClipRRect(
               borderRadius:
                   const BorderRadius.all(Radius.circular(defaultPadding / 2)),
               child: Image.asset(
-                "assets/images/user_pic.png",
+                "assets/images/user.png",
                 height: 120,
                 width: 120,
               ),
             ),
-            SizedBox(height: defaultPadding),
+            const SizedBox(height: defaultPadding),
             Form(
               child: Column(
                 children: [

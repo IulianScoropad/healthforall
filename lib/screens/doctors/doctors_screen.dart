@@ -10,7 +10,7 @@ import 'components/docotor_card.dart';
 class DoctorsScreen extends StatefulWidget {
 
 
-  const DoctorsScreen({Key? key}) : super(key: key);
+  const DoctorsScreen({super.key});
 
   @override
   _DoctorsScreenState createState() => _DoctorsScreenState();
@@ -32,7 +32,7 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              CustomAppBar(
+              const CustomAppBar(
                 text: "Available",
                 title: "Specialist",
               ),
@@ -42,19 +42,19 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                   future: futureDoctors,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text('No doctors found'));
+                      return const Center(child: Text('No doctors found'));
                     }
 
                     List<AvailableDoctor> doctors = snapshot.data!;
                     return GridView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: doctors.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: defaultPadding,
                         mainAxisSpacing: defaultPadding,

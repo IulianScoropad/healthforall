@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'components/search_form.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search Here"),
+        title: const Text("Search Your Specialist"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -17,22 +17,8 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Search Your",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(fontWeight: FontWeight.normal),
-              ),
-              Text(
-                "Specialist",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: defaultPadding),
-              SearchForm(),
+              const SizedBox(height: 50.0),
+              const SearchForm(),
             ],
           ),
         ),
