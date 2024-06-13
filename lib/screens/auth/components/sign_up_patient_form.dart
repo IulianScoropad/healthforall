@@ -29,7 +29,7 @@ class SignUpForm extends StatelessWidget {
   final GlobalKey formKey;
    final DropdownController dropdownController = DropdownController('Alba');
 
-  late String _userName, _email, _password, _phoneNumber;
+  late String  _password;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,6 @@ class SignUpForm extends StatelessWidget {
           TextFormField(
             controller: editUserNameController,
             validator: RequiredValidator(errorText: "Username is required").call,
-            onSaved: (username) => _userName = username!,
           ),
           const SizedBox(height: defaultPadding),
           const TextFieldName(text: "Email"),
@@ -50,7 +49,6 @@ class SignUpForm extends StatelessWidget {
             controller: editMaileController,
             keyboardType: TextInputType.emailAddress,
             validator: EmailValidator(errorText: "Use a valid email!").call,
-            onSaved: (email) => _email = email!,
           ),
           const SizedBox(height: defaultPadding),
           const TextFieldName(text: "Phone"),
@@ -59,7 +57,6 @@ class SignUpForm extends StatelessWidget {
             controller: editPhoneNumberController,
             keyboardType: TextInputType.phone,
             validator: RequiredValidator(errorText: "Phone number is required").call,
-            onSaved: (phoneNumber) => _phoneNumber = phoneNumber!,
           ),
           const SizedBox(height: defaultPadding),
           const TextFieldName(text: "Region"),
