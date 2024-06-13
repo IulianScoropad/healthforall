@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:healthforall/screens/home/components/appointment_card_doctor.dart';
+import 'package:healthforall/screens/appointment/components/AppointmentCardPatient.dart';
 import 'package:healthforall/chat/chat.dart';
 
 import '../../constants.dart';
@@ -13,12 +13,16 @@ class HomeScreenDoctor extends StatefulWidget {
   @override
   _HomeScreenDoctor createState() => _HomeScreenDoctor();
 }
-
+String getChatId(String doctorId, String userId) {
+  return '${doctorId}_$userId';
+}
 
 class _HomeScreenDoctor extends State<HomeScreenDoctor> {
   Future<List<AppointmentPatience>> _fetchAppointments() async {
-    final databaseReference = FirebaseDatabase.instance.reference().child("appointments");
-    final value = await databaseReference.orderByChild('doctorId').equalTo(globalUserId).once();
+    final databaseReference = FirebaseDatabase.instance.ref().child(
+        "appointments");
+    final value = await databaseReference.orderByChild('doctorId').equalTo(
+        globalUserId).once();
     final snapshotD = value.snapshot;
     List<AppointmentPatience> appointments = [];
     if (snapshotD.value != null && snapshotD.value is Map<dynamic, dynamic>) {
@@ -26,7 +30,8 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
       for (var key in values.keys) {
         var value = values[key];
         if (value is Map<dynamic, dynamic>) {
-          Map<String, String> pacientDetails = await getPacientDetails(value['patientId']);
+          Map<String, String> pacientDetails = await getPacientDetails(
+              value['patientId']);
           AppointmentPatience appointment = AppointmentPatience.fromMap(
             key,
             value,
@@ -40,7 +45,9 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
   }
 
   Future<Map<String, String>> getPacientDetails(String pacientId) async {
-    final doctorReference = FirebaseDatabase.instance.reference().child("Pacienti").child(pacientId);
+    final doctorReference = FirebaseDatabase.instance.ref()
+        .child("Pacienti")
+        .child(pacientId);
     final value = await doctorReference.once();
     final snapshot = value.snapshot;
     if (snapshot.value != null && snapshot.value is Map<dynamic, dynamic>) {
@@ -60,12 +67,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
       };
     }
   }
-  Future<void> _deleteAppointment(String appointmentId) async {
-    final databaseReference = FirebaseDatabase.instance.reference().child("appointments").child(appointmentId);
-    await databaseReference.remove();
-    // Reîmprospătarea listei de programări după ștergere
-    setState(() {});
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +87,8 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
             return SingleChildScrollView(
               padding: const EdgeInsets.all(defaultPadding),
               child: Column(
-                children: snapshot.data!.map((appointment) => _buildAppointmentCard(appointment)).toList(),
+                children: snapshot.data!.map((appointment) =>
+                    _buildAppointmentCard(appointment)).toList(),
               ),
             );
           }
@@ -107,7 +110,8 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
           Row(
             children: [
               Expanded(
-                child: buildAppointmentInfo("Pacient", appointment.patienceName),
+                child: buildAppointmentInfo(
+                    "Pacient", appointment.patienceName),
               ),
 
               Expanded(
@@ -138,14 +142,15 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChatScreen(chatId: getChatId(globalUserId!, appointment.userId),
-                          userId: globalUserId!,),
+                        builder: (context) =>
+                            ChatScreen(chatId: getChatId(
+                                globalUserId!, appointment.userId),
+                              userId: globalUserId!,),
                       ),
                     );
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/Chat.svg",
-                    color: Colors.white,
                     width: 11,
                   ),
                   label: const Text("Message"),
@@ -158,30 +163,7 @@ class _HomeScreenDoctor extends State<HomeScreenDoctor> {
     );
   }
 
-  Column buildAppointmentInfo(String title, String text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey.withOpacity(0.62),
-          ),
-        ),
-        Text(
-          text,
-          maxLines: 1,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-      ],
-    );
-  }
 }
 
-  String getChatId(String doctorId, String userId) {
-    // Generate a chat ID based on doctorId and userId
-    return '${doctorId}_$userId';
-  }
 
 

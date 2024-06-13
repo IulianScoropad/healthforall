@@ -1,8 +1,7 @@
-import 'package:healthforall/models/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
-import 'rating.dart';
+import '../../../constants.dart';
+import '../../../components/rating.dart';
 
 class AvailableDoctorCard extends StatelessWidget {
   const AvailableDoctorCard({
@@ -37,7 +36,7 @@ class AvailableDoctorCard extends StatelessWidget {
                 const Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: defaultPadding / 2),
-                  child: Rating(score: 5),
+                  child: Rating(score: 1),
                 ),
                 const SizedBox(height: defaultPadding / 2),
                 Text(

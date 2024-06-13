@@ -3,7 +3,6 @@ class AppointmentPatience {
   final String userId;
   final String doctorId;
   final String date;
-  // final String time;
   final String patienceName;
   final String phone;
   final String region;
@@ -14,7 +13,6 @@ class AppointmentPatience {
     required this.userId,
     required this.doctorId,
     required this.date,
-    // required this.time,
     required this.patienceName,
     required this.phone,
     required this.region,

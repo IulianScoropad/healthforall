@@ -1,7 +1,6 @@
-import 'package:healthforall/screens/search/search_screen.dart';
+import 'package:healthforall/screens/regionSearch/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../constants.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -45,10 +44,6 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
             icon: SvgPicture.asset("assets/icons/Serach.svg"),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset("assets/icons/Chat.svg"),
           ),
         ],
       ),

@@ -1,26 +1,24 @@
-class Appointment {
+class AppointmentDoctor {
   final String id;
   final String userId;
   final String doctorId;
   final String date;
- // final String time;
   final String doctorName;
   final String type;
   final String place;
 
-  Appointment({
+  AppointmentDoctor({
     required this.id,
     required this.userId,
     required this.doctorId,
     required this.date,
-   // required this.time,
     required this.doctorName,
     required this.type,
     required this.place,
   });
 
-  factory Appointment.fromMap(String id, Map<dynamic, dynamic> data, Map<String, String> doctorDetails) {
-    return Appointment(
+  factory AppointmentDoctor.fromMap(String id, Map<dynamic, dynamic> data, Map<String, String> doctorDetails) {
+    return AppointmentDoctor(
       id: id,
       userId: data['patientId'],
       doctorId: data['doctorId'],

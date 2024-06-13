@@ -1,4 +1,4 @@
-import 'package:healthforall/screens/appointment/my_appointment_screen.dart';
+import 'package:healthforall/screens/appointment/patient_appointment_screen.dart';
 import 'package:healthforall/screens/doctors/doctors_screen.dart';
 import 'package:healthforall/screens/home/home_screen.dart';
 import 'package:healthforall/screens/profile/profile_screen.dart';
@@ -15,10 +15,10 @@ class MainScreen extends StatefulWidget {
 
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class MainScreenState extends State<MainScreen> {
   late final List<Widget> _pages;
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
       const HomePage(),
       const DoctorsScreen(),
       const MyAppointmentScreen(),
-      ProfileScreen(), // Accesăm userId folosind widget.userId aici
+      ProfileScreen(),
     ];
   }
   int _selectedPage = 0;

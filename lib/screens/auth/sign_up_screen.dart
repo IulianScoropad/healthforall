@@ -3,7 +3,7 @@ import 'package:healthforall/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../controllers.dart';
-import 'components/sign_up_form.dart';
+import 'components/sign_up_patient_form.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -15,7 +15,6 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    // But still same problem, let's fixed it
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -24,7 +23,6 @@ class SignUpScreen extends StatelessWidget {
           SvgPicture.asset(
             "assets/icons/Sign_Up_bg.svg",
             height: MediaQuery.of(context).size.height,
-            // Now it takes 100% of our height
           ),
           Center(
             child: SafeArea(

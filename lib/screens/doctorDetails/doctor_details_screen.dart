@@ -1,12 +1,10 @@
 import 'package:healthforall/components/heightlight.dart';
 import 'package:healthforall/components/rating.dart';
-import 'package:healthforall/models/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 import '../../constants.dart';
 import 'package:healthforall/screens/appointment/appointment_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../controllers.dart';
-//import '../../models/SearchDoctor.dart';
 import 'components/communication.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
@@ -20,7 +18,7 @@ class DoctorDetailsScreen extends StatelessWidget {
     doctorID = doctor.key.toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dr.${doctor.username  ?? ""}"),
+        title: Text("Dr. ${doctor.username  ?? ""}"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -33,11 +31,10 @@ class DoctorDetailsScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: defaultPadding),
                 child: Communication(),
               ),
-              Text(
-               doctor.categorie ?? "",
+              Text("Category: ${doctor.categorie ?? ""} ",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              Text(doctor.hospitalname ?? ""),
+              Text("Hospital Name: ${doctor.hospitalname ?? ""}"),
               const Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: defaultPadding / 4),
@@ -45,7 +42,7 @@ class DoctorDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding),
               Text(
-                "About${doctor.username ?? " "}",
+                "About ${doctor.username ?? " "}",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Padding(
@@ -66,7 +63,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                     ),
                     Highlight(
                       name: "Experience",
-                      text: "${doctor.experience ?? ""}Years" ,
+                      text: "${doctor.experience ?? ""} Years" ,
                     ),
                     const Highlight(
                       name: "Reviews",
@@ -79,8 +76,6 @@ class DoctorDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: defaultPadding),
                 child: ElevatedButton(
                   onPressed: () =>
-
-
                     Navigator.push(
                       context,
                       MaterialPageRoute(

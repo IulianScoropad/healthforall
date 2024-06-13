@@ -22,7 +22,6 @@ class AvailableDoctor {
 
 
   factory AvailableDoctor.fromMap(String key,Map<dynamic, dynamic> data) {
-   // Map<dynamic, dynamic>? data = snapshot.value as Map<dynamic, dynamic>?;
 
     return AvailableDoctor(
       key: key,
@@ -37,7 +36,7 @@ class AvailableDoctor {
       adresa: data['adress'],
       despre: data['about'],
       image: "assets/images/doctor_photo.png",
-      categorie: "category"
+      categorie: data["category"]
     );
   }
 }

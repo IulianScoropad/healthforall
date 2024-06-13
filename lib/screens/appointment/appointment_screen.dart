@@ -1,10 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:healthforall/controllers.dart';
-
 import '../../constants.dart';
 import 'package:healthforall/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'cpmponents/calendar.dart';
+import 'components/Appointment.dart';
+import 'components/calendar.dart';
 
 class AppointmentScreen extends StatefulWidget {
 
@@ -12,12 +12,12 @@ class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({super.key});
 
   @override
-  _AppointmentScreenState createState() => _AppointmentScreenState();
+  AppointmentScreenState createState() => AppointmentScreenState();
 }
 
 
 
-class _AppointmentScreenState extends State<AppointmentScreen> {
+class AppointmentScreenState extends State<AppointmentScreen> {
   final List<String> sloats = [
     "10:10 am",
     "10:30 am",
@@ -29,7 +29,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   int selectedSloats = 0;
 
   Future<void> saveAppointment(Appointment appointment) async {
-    final databaseReference = FirebaseDatabase.instance.reference().child("appointments");
+    final databaseReference = FirebaseDatabase.instance.ref().child("appointments");
     await databaseReference.push().set(appointment.toMap());
   }
 
@@ -93,17 +93,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             child: ElevatedButton(
               onPressed: () async {
 
-                final String doctor = doctorID.toString(); // replace with actual doctor ID
-                final String patientId = globalUserId.toString(); // replace with actual patient ID
-                 // Replace with actual selected date
+                final String doctor = doctorID.toString();
+                final String patientId = globalUserId.toString();
                 final selectedTime = sloats[selectedSloats];
-
-              //  final appointmentDateTime = DateTime.parse(
-              //    "${selectedDate.toIso8601String().split('T').first} ${selectedTime}",
-             //   );
-
                 final appointmentDateTime = '${selectedDate.day}/${selectedDate.month}/${selectedDate.year} , $selectedTime';
-
                 final appointment = Appointment(
                   doctorUID: doctor,
                   patientId: patientId,
@@ -129,22 +122,3 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 }
 
 
-class Appointment {
-  final String doctorUID;
-  final String patientId;
-  final String dateTime;
-
-  Appointment({
-    required this.doctorUID,
-    required this.patientId,
-    required this.dateTime,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'doctorId': doctorUID,
-      'patientId': patientId,
-      'dateTime': dateTime,
-    };
-  }
-}

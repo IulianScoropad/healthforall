@@ -57,7 +57,6 @@ class Communication extends StatelessWidget {
             },
             icon: SvgPicture.asset(
               "assets/icons/Chat.svg",
-              color: Colors.white,
               width: 11,
             ),
             label: const Text("Message"),

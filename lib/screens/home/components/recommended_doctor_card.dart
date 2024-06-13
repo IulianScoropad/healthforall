@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../models/RecommendDoctor.dart';
+import 'package:healthforall/screens/doctors/components/RecommendDoctor.dart';
 
 class RecommendDoctorCard extends StatelessWidget {
   const RecommendDoctorCard({
@@ -28,7 +28,7 @@ class RecommendDoctorCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Looking For Your Desire Specialist Doctor?",
+                  "Cauți medicul specialist dorit?",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w600),
                 ),

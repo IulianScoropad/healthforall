@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'recommended_doctor_card.dart';
-import '../../../models/RecommendDoctor.dart';
+import 'package:healthforall/screens/doctors/components/RecommendDoctor.dart';
 
 class RecommendedDoctors extends StatelessWidget {
   const RecommendedDoctors({

@@ -1,6 +1,5 @@
-import 'package:healthforall/models/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -15,7 +14,6 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //doctorID = key as String?;
     return GestureDetector(
       onTap: press,
       child: Container(

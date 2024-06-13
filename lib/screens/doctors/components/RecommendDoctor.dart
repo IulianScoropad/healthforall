@@ -1,5 +1,5 @@
-import 'package:firebase_database/firebase_database.dart'; // Importați pachetul Firebase
-List<RecommendedDoctor> recommendedDoctors = [];
+import 'package:firebase_database/firebase_database.dart';
+
 class RecommendedDoctor {
   final String name, speciality, institute, image;
 
@@ -12,7 +12,8 @@ class RecommendedDoctor {
 }
 
 class RecommendedDoctorService {
-  final DatabaseReference _database = FirebaseDatabase.instance.reference().child('Doctors');
+  List<RecommendedDoctor> recommendedDoctors = [];
+  final DatabaseReference _database = FirebaseDatabase.instance.ref().child('Doctors');
 
   Future<List<RecommendedDoctor>> getRecommendedDoctors() async {
 
@@ -29,7 +30,6 @@ class RecommendedDoctorService {
           String institute = value['hospitalname'];
           String image = "assets/images/doctor_photo.png";
           String experienceAsString = value['experienceyears'];
-           // Experiența ca șir de caractere
           int experience = int.parse(experienceAsString);
           if (experience >= 10) {
             RecommendedDoctor doctor = RecommendedDoctor(

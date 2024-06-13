@@ -5,11 +5,11 @@ class Calendar extends StatefulWidget {
   final Function(DateTime) onDateSelected;
   const Calendar({super.key, required this.onDateSelected});
   @override
-  _CalendarState createState() => _CalendarState();
+  CalendarState createState() => CalendarState();
 }
 
 
-class _CalendarState extends State<Calendar> {
+class CalendarState extends State<Calendar> {
   DateTime selectedDate = DateTime.now();
 
   int currentDateSelectedIndex = 0;

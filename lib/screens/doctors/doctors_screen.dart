@@ -1,10 +1,9 @@
 import 'package:healthforall/components/custom_app_bar.dart';
 import 'package:healthforall/constants.dart';
-import 'package:healthforall/models/AvailableDoctor.dart';
-import 'package:healthforall/models/DoctorProvider.dart';
-import 'package:healthforall/screens/details/doctor_details_screen.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/DoctorProvider.dart';
+import 'package:healthforall/screens/doctorDetails/doctor_details_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'components/docotor_card.dart';
 
 class DoctorsScreen extends StatefulWidget {
@@ -13,10 +12,10 @@ class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen({super.key});
 
   @override
-  _DoctorsScreenState createState() => _DoctorsScreenState();
+  DoctorsScreenState createState() => DoctorsScreenState();
 }
 
-class _DoctorsScreenState extends State<DoctorsScreen> {
+class DoctorsScreenState extends State<DoctorsScreen> {
   late Future<List<AvailableDoctor>> futureDoctors;
 
   @override

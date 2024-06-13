@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:healthforall/components/available_doctor_card.dart';
+import 'package:healthforall/screens/home/components/available_doctor_card.dart';
 import 'package:healthforall/components/section_title.dart';
 import 'package:healthforall/constants.dart';
-import 'package:healthforall/models/AvailableDoctor.dart';
-import 'package:healthforall/models/DoctorProvider.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/DoctorProvider.dart';
 import 'package:healthforall/screens/doctors/doctors_screen.dart';
 
 class AvailableDoctors extends StatefulWidget {

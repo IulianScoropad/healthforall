@@ -1,12 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:healthforall/models/AvailableDoctor.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 
 class DoctorProvider {
   static Future<List<AvailableDoctor>> fetchDoctors() async {
     List<AvailableDoctor> doctors = [];
 
     try {
-      final databaseReference = FirebaseDatabase.instance.reference();
+      final databaseReference = FirebaseDatabase.instance.ref();
       DatabaseEvent event = await databaseReference.child('Doctors').once();
       DataSnapshot snapshot = event.snapshot;
 

@@ -22,3 +22,4 @@ String? doctorID;
 String? globalSelectedRegion;
 String? globalSelectedCategory;
 DateTime? globalSelectedDate;
+String doctorCategory = '';

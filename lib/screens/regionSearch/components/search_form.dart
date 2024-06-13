@@ -1,5 +1,5 @@
 import 'package:healthforall/controllers.dart';
-import 'package:healthforall/screens/search/search_result_screen.dart';
+import 'package:healthforall/screens/regionSearch/search_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,10 +10,10 @@ class SearchForm extends StatefulWidget {
   const SearchForm({super.key});
 
   @override
-  _SearchFormState createState() => _SearchFormState();
+  SearchFormState createState() => SearchFormState();
 }
 
-class _SearchFormState extends State<SearchForm> {
+class SearchFormState extends State<SearchForm> {
 
 
   @override
@@ -77,7 +77,6 @@ class _SearchFormState extends State<SearchForm> {
               ),
               child: const Text("Search"),
             ),
-
         ],
       ),
     );

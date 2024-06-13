@@ -10,10 +10,10 @@ class ProfileScreen extends StatefulWidget {
    ProfileScreen({super.key});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  ProfileScreenState createState() => ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
    late String _name ;
   late  String _email ;
    late String _phoneNumber;
@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> fetchUserData() async {
     try {
-      final databaseReference = FirebaseDatabase.instance.reference();
+      final databaseReference = FirebaseDatabase.instance.ref();
       DatabaseEvent event = await databaseReference.child('Pacienti/$globalUserId').once();
       DataSnapshot snapshot = event.snapshot;
       if (snapshot.value != null) {
@@ -44,7 +44,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     } catch (error) {
-      print("Error fetching user data: $error");
       setState(() {
         _isLoading = false;
       });
@@ -92,7 +91,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   TextFormField(
                     initialValue: _name,
-                    decoration: inputDecoration.copyWith(hintText: "Name"),
                       readOnly: true,
                   ),
                   Padding(
@@ -100,14 +98,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const EdgeInsets.symmetric(vertical: defaultPadding),
                     child: TextFormField(
                       initialValue: _email,
-                      decoration: inputDecoration.copyWith(hintText: "Email"),
                         readOnly: true,
                     ),
                   ),
                   TextFormField(
                     initialValue: _phoneNumber,
-                    decoration:
-                        inputDecoration.copyWith(hintText: "Phone Number"),
                       readOnly: true,
                   ),
                   Padding(
@@ -115,13 +110,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const EdgeInsets.symmetric(vertical: defaultPadding),
                     child: TextFormField(
                       initialValue: _address,
-                      decoration: inputDecoration.copyWith(hintText: "Address"),
                     ),
                   ),
                   TextFormField(
                     initialValue: _region,
-                    decoration:
-                    inputDecoration.copyWith(hintText: "Region"),
                     readOnly: true,
                   ),
                 ],
@@ -134,10 +126,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-const InputDecoration inputDecoration = InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  border: OutlineInputBorder(borderSide: BorderSide.none),
-  enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-  focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-);

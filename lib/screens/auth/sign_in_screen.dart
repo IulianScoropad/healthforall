@@ -6,13 +6,16 @@ import '../../constants.dart';
 import 'components/sign_in_form.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../../controllers.dart';
-import 'package:healthforall/screens/home/home_screen_doctor.dart';
+import 'package:healthforall/screens/appointment/doctor_appointment_screen.dart';
 
 class SignInScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
+
   String errorMessage = '';
+
   String userId = '';
+
   DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
   SignInScreen({super.key});
@@ -20,8 +23,6 @@ class SignInScreen extends StatelessWidget {
   Future<void> login(BuildContext context, String email, String password) async{
     final String email = editMaileController.text.trim();
     final String password = editPasswordController.text.trim();
-
-
     try{
       DatabaseEvent value = await dbRef.child('Pacienti').orderByChild('mail').equalTo(email).once();
       DataSnapshot snapshot = value.snapshot;
@@ -36,17 +37,14 @@ class SignInScreen extends StatelessWidget {
         context,
         MaterialPageRoute(builder: (context) => const MainScreen()),
        );
-
       } else{
           errorMessage ='Incorrect password';
-
         }
     });
     if (!foundUser) {
       errorMessage = 'Incorrect password';
     }
       } else {
-
         value = await dbRef.child('Doctors').orderByChild('mail').equalTo(email).once();
         snapshot = value.snapshot;
         if (snapshot.value != null) {
@@ -75,7 +73,6 @@ class SignInScreen extends StatelessWidget {
       }
   } catch (e){
       errorMessage = 'An error occurred. Please try again.';
-
     }
   }
   @override

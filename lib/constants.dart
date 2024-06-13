@@ -14,7 +14,28 @@ OutlineInputBorder textFieldBorder = OutlineInputBorder(
   ),
 );
 
-// I will explain it later
+
+Column buildAppointmentInfo(String title, String text) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: TextStyle(
+          fontSize: 12,
+          color: Colors.grey.withOpacity(0.62),
+        ),
+      ),
+      Text(
+        text,
+        maxLines: 1,
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+    ],
+  );
+}
+
+
 
 const emailError = 'Enter a valid email address';
 const requiredField = "This field is required";

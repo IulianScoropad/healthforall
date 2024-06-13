@@ -1,5 +1,4 @@
-import 'package:healthforall/models/AvailableDoctor.dart';
-//import 'package:healthforall/models/SearchDoctor.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

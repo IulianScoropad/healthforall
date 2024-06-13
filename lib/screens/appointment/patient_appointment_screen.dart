@@ -1,7 +1,7 @@
 import '../../constants.dart';
 import '../../controllers.dart';
 import 'package:flutter/material.dart';
-import 'package:healthforall/screens/appointment/cpmponents/appointement.dart';
+import 'package:healthforall/screens/appointment/components/AppointementCardDoctor.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 
@@ -9,23 +9,24 @@ class MyAppointmentScreen extends StatefulWidget {
   const MyAppointmentScreen({super.key});
 
   @override
-  _MyAppointmentScreenState createState() => _MyAppointmentScreenState();
+  MyAppointmentScreenState createState() => MyAppointmentScreenState();
 }
 
 
-  class _MyAppointmentScreenState extends State<MyAppointmentScreen> {
-  Future<List<Appointment>> _fetchAppointments() async {
-    final databaseReference = FirebaseDatabase.instance.reference().child("appointments");
+  class MyAppointmentScreenState extends State<MyAppointmentScreen> {
+
+  Future<List<AppointmentDoctor>> fetchAppointments() async {
+    final databaseReference = FirebaseDatabase.instance.ref().child("appointments");
     final value = await databaseReference.orderByChild('patientId').equalTo(globalUserId).once();
     final snapshotD = value.snapshot;
-    List<Appointment> appointments = [];
+    List<AppointmentDoctor> appointments = [];
     if (snapshotD.value != null && snapshotD.value is Map<dynamic, dynamic>) {
       Map<dynamic, dynamic> values = snapshotD.value as Map<dynamic, dynamic>;
       for (var key in values.keys) {
         var value = values[key];
         if (value is Map<dynamic, dynamic>) {
           Map<String, String> doctorDetails = await getDoctorDetails(value['doctorId']);
-          Appointment appointment = Appointment.fromMap(
+          AppointmentDoctor appointment = AppointmentDoctor.fromMap(
             key,
             value,
             doctorDetails,
@@ -38,7 +39,7 @@ class MyAppointmentScreen extends StatefulWidget {
   }
 
   Future<Map<String, String>> getDoctorDetails(String doctorId) async {
-    final doctorReference = FirebaseDatabase.instance.reference().child("Doctors").child(doctorId);
+    final doctorReference = FirebaseDatabase.instance.ref().child("Doctors").child(doctorId);
     final value = await doctorReference.once();
     final snapshot = value.snapshot;
     if (snapshot.value != null && snapshot.value is Map<dynamic, dynamic>) {
@@ -56,10 +57,10 @@ class MyAppointmentScreen extends StatefulWidget {
       };
     }
   }
-  Future<void> _deleteAppointment(String appointmentId) async {
-    final databaseReference = FirebaseDatabase.instance.reference().child("appointments").child(appointmentId);
+  
+  Future<void> deleteAppointment(String appointmentId) async {
+    final databaseReference = FirebaseDatabase.instance.ref().child("appointments").child(appointmentId);
     await databaseReference.remove();
-    // Reîmprospătarea listei de programări după ștergere
     setState(() {});
   }
   @override
@@ -68,8 +69,8 @@ class MyAppointmentScreen extends StatefulWidget {
       appBar: AppBar(
         title: const Text("My Appointments"),
       ),
-      body: FutureBuilder<List<Appointment>>(
-        future: _fetchAppointments(),
+      body: FutureBuilder<List<AppointmentDoctor>>(
+        future: fetchAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -90,7 +91,7 @@ class MyAppointmentScreen extends StatefulWidget {
     );
   }
 
-  Widget _buildAppointmentCard(Appointment appointment) {
+  Widget _buildAppointmentCard(AppointmentDoctor appointment) {
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
       margin: const EdgeInsets.only(bottom: defaultPadding),
@@ -126,7 +127,7 @@ class MyAppointmentScreen extends StatefulWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () async{
-                    await _deleteAppointment(appointment.id);
+                    await deleteAppointment(appointment.id);
                   },
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text("Cancel"),
@@ -139,23 +140,4 @@ class MyAppointmentScreen extends StatefulWidget {
     );
   }
 
-  Column buildAppointmentInfo(String title, String text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey.withOpacity(0.62),
-          ),
-        ),
-        Text(
-          text,
-          maxLines: 1,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-      ],
-    );
-  }
 }

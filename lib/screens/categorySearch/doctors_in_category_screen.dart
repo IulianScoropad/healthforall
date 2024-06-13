@@ -1,33 +1,30 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:healthforall/components/section_title.dart';
 import 'package:healthforall/constants.dart';
 import 'package:healthforall/controllers.dart';
-import 'package:healthforall/models/AvailableDoctor.dart';
-import 'package:healthforall/screens/details/doctor_details_screen.dart';
+import 'package:healthforall/screens/doctorDetails/doctor_details_screen.dart';
+import 'package:healthforall/screens/doctors/components/AvailableDoctor.dart';
 import 'package:healthforall/screens/home/components/available_doctors.dart';
+import 'package:healthforall/screens/regionSearch/components/search_doctor_card.dart';
 
+class DoctorsInCategoryScreen extends StatefulWidget {
 
-
-import 'components/search_doctor_card.dart';
-
-
-class SearchResultScreen extends StatefulWidget {
-  const SearchResultScreen({super.key});
+  const DoctorsInCategoryScreen({super.key});
 
   @override
-  _SearchResultScreenState createState() => _SearchResultScreenState();
+  DoctorsInCategoryScreenState createState() => DoctorsInCategoryScreenState();
 }
 
-class _SearchResultScreenState extends State<SearchResultScreen> {
+class DoctorsInCategoryScreenState extends State<DoctorsInCategoryScreen> {
   late Query _query;
 
   @override
   void initState() {
     super.initState();
-    DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-    _query = databaseReference.child('Doctors').orderByChild('region').equalTo(globalSelectedRegion);
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    _query = databaseReference.child('Doctors').orderByChild('category').equalTo(doctorCategory);
 
   }
 
@@ -38,10 +35,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         title: Column(
           children: [
             Text(
-              "Selected area",
+              "Selected category",
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            Text(globalSelectedRegion ?? " "),
+            Text(doctorCategory),
           ],
         ),
         actions: [
