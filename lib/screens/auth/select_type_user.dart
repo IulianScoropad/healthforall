@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:healthforall/screens/auth/sign_up_medic.dart';
-import 'package:healthforall/screens/auth/sign_up_screen.dart';
+import 'package:healthforall/screens/auth/sign_up_patient.dart';
 class SelectTypeUser extends StatelessWidget {
   const SelectTypeUser({super.key});
 

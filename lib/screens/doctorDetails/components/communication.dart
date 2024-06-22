@@ -51,7 +51,7 @@ class Communication extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChatScreen(chatId: "${doctorID!}_${globalUserId!}", userId: globalUserId!),
+                  builder: (context) => ChatScreen(chatId: formatDoctorUserId(doctorID!,globalUserId!), userId: globalUserId!),
                 ),
               );
             },
@@ -65,4 +65,8 @@ class Communication extends StatelessWidget {
       ],
     );
   }
+}
+
+String formatDoctorUserId(String doctor, String UserId) {
+  return '${doctor}_${UserId}';
 }

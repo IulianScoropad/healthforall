@@ -26,22 +26,25 @@ class ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: StreamBuilder(
-              stream: _databaseReference.child('chats/${widget.chatId}/messages').orderByChild('timestamp').onValue,
-              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
-                List messageList = messages.values.toList();
-                return ListView.builder(
-                  controller: _scrollController,
-                  itemCount: messageList.length,
-                  itemBuilder: (context, index) {
-                    return _buildMessageItem(messageList[index]);
-                  },
-                );
-              },
-            ),
+            stream: _databaseReference.child('chats/${widget.chatId}/messages').orderByChild('timestamp').onValue,
+            builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
+              List messageList = messages.entries
+                  .map((entry) => Map<dynamic, dynamic>.from(entry.value))
+                  .toList()
+                ..sort((a, b) => (a['timestamp'] as int).compareTo(b['timestamp'] as int));
+              return ListView.builder(
+                controller: _scrollController,
+                itemCount: messageList.length,
+                itemBuilder: (context, index) {
+                  return _buildMessageItem(messageList[index]);
+                },
+              );
+            },
+          ),
           ),
           _buildMessageInput(),
         ],
@@ -100,10 +103,8 @@ class ChatScreenState extends State<ChatScreen> {
     await _databaseReference.child('chats/${widget.chatId}/messages').push().set({
       'senderId': widget.userId,
       'text': messageText,
-      'timestamp': DateTime.now().toIso8601String(),
+      'timestamp': ServerValue.timestamp,
     });
-
-    // Scroll to the bottom after sending a message
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),

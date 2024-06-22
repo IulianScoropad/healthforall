@@ -21,8 +21,7 @@ class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
   Future<void> login(BuildContext context, String email, String password) async{
-    final String email = editMaileController.text.trim();
-    final String password = editPasswordController.text.trim();
+
     try{
       DatabaseEvent value = await dbRef.child('Pacienti').orderByChild('mail').equalTo(email).once();
       DataSnapshot snapshot = value.snapshot;
@@ -38,11 +37,11 @@ class SignInScreen extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const MainScreen()),
        );
       } else{
-          errorMessage ='Incorrect password';
+          errorMessage ='Parolă incorectă';
         }
     });
     if (!foundUser) {
-      errorMessage = 'Incorrect password';
+      errorMessage = 'Utilizatorul nu a fost găsit!';
     }
       } else {
         value = await dbRef.child('Doctors').orderByChild('mail').equalTo(email).once();
@@ -61,14 +60,14 @@ class SignInScreen extends StatelessWidget {
               );
 
             } else {
-              errorMessage = 'Incorrect password';
+              errorMessage = 'Parolă incorectă';
             }
           });
           if (!foundUser) {
-            errorMessage = 'Incorrect password';
+            errorMessage = 'Utilizatorul nu a fost găsit!';
           }
         } else {
-          errorMessage = 'Email not found';
+          errorMessage = 'Email invalid';
         }
       }
   } catch (e){
@@ -128,7 +127,7 @@ class SignInScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                            login(context, editMaileController.text.trim(), editPasswordController.text.trim());
+                            login(context, editMaileController.text, editPasswordController.text);
                         },
                           style: TextButton.styleFrom(
                             backgroundColor: const Color(0xFF6CD8D1),

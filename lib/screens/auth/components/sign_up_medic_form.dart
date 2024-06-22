@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:healthforall/screens/auth/components/text_filed_name.dart';
 import '../../../constants.dart';
 import '../../../controllers.dart';
 
@@ -30,7 +31,7 @@ class SignUpMedicFrom extends StatelessWidget {
   final DropdownController dropdownController = DropdownController('Alba');
   final DropdownController dropdownControllerMedic = DropdownController('Pediatrician');
 
-  late String _userName, _email, _password, _phoneNumber;
+  late String  _password;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class SignUpMedicFrom extends StatelessWidget {
           TextFormField(
             controller: editUserNameController,
             validator: RequiredValidator(errorText: "Username is required").call,
-            onSaved: (username) => _userName = username!,
+
           ),
           const SizedBox(height: defaultPadding),
 
@@ -52,7 +53,6 @@ class SignUpMedicFrom extends StatelessWidget {
             controller: editMaileController,
             keyboardType: TextInputType.emailAddress,
             validator: EmailValidator(errorText: "Use a valid email!").call,
-            onSaved: (email) => _email = email!,
           ),
           const SizedBox(height: defaultPadding),
           const TextFieldName(text: "Phone"),
@@ -61,7 +61,6 @@ class SignUpMedicFrom extends StatelessWidget {
             controller: editPhoneNumberController,
             keyboardType: TextInputType.phone,
             validator: RequiredValidator(errorText: "Phone number is required").call,
-            onSaved: (phoneNumber) => _phoneNumber = phoneNumber!,
           ),
           const SizedBox(height: defaultPadding),
           const TextFieldName(text: "Region"),
@@ -185,22 +184,3 @@ class SignUpMedicFrom extends StatelessWidget {
   }
 }
 
-class TextFieldName extends StatelessWidget {
-  const TextFieldName({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: defaultPadding / 3),
-      child: Text(
-        text,
-        style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black54),
-      ),
-    );
-  }
-}

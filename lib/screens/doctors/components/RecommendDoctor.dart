@@ -16,8 +16,6 @@ class RecommendedDoctorService {
   final DatabaseReference _database = FirebaseDatabase.instance.ref().child('Doctors');
 
   Future<List<RecommendedDoctor>> getRecommendedDoctors() async {
-
-
     try {
       DatabaseEvent value = await _database.once();
       final snapshot = value.snapshot;
@@ -45,7 +43,6 @@ class RecommendedDoctorService {
     } catch (error) {
       print('Error fetching recommended doctors: $error');
     }
-
     return recommendedDoctors;
   }
 }
