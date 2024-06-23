@@ -91,3 +91,6 @@ Eu am testat tot pe dispozitivul meu fizic Xiaomi Redmi Note 8T ce ruleaza pe An
 ## Instalare Dispozitiv
 
 In cazul in care doriti sa instalati aplicatia direct pe dispozitivele persoanle, po puteti face doar daca dispuneti de un dispozitiv Android cu o versiunea mai mare de 9, descarcand [APK-ul](https://uptro29158-my.sharepoint.com/personal/iulian_scoropad_student_upt_ro/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fiulian%5Fscoropad%5Fstudent%5Fupt%5Fro%2FDocuments%2FLicenta%2FReadme%26APK&ga=1)
+
+
+In cazul in care intimpinati dificultati in instalarea aplicatiei [aici](https://www.digitalcitizen.ro/cum-instalezi-aplicatii-pe-dispozitive-cu-android-folosind-fisiere-apk/#ftoc-cum-instalezi-un-apk-pe-android) aveti informatii despre cum puteti permite instalarea aplicatiilor din surese necunocute.
