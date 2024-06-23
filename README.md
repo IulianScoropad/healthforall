@@ -1,46 +1,46 @@
-# HealthForAll pasi de compilare si rulare
+# HealthForAll pași de compilare și rulare
 
 ## Descriere
 
-HealthForAll este o aplicatie mobila, care ofera pacientilor posibilitatea de alegere
-si programare la consultatie catre medicul dorit, propus dintr-o lista de medici specialisti
-disponibili si inregistrati, din toata tara. 
+HealthForAll este o aplicație mobilă, care oferă pacienților posibilitatea de alegere
+și programare la consultație către medicul dorit, propus dintr-o listă de medici specialiști
+disponibili și înregistrați, din toată țara. 
 
 
 ## Repository
 
-Codul sursa complet al proiectului este disponibil la urmatoarea adresa:
+Codul sursă complet al proiectului este disponibil la următoarea adresa:
 [Repository GitHub](https://github.com/IulianScoropad/healthforall)
 
-## Pasi de Configurare
+## Pași de Configurare
 
-1. **Instalam si configuram Android Studio**  
-   Urmariti pasii de la adresa urmatoare: [Instalare Android Studio](https://developer.android.com/studio/install#windows). 
-   Eu am lucrat pe versiunea de Windows, dar poate fi instalat pe sistemul de operare pe care il aveti.
+1. **Instalăm și configurăm Android Studio**  
+   Urmăriți pașii de la adresa următoare: [Instalare Android Studio](https://developer.android.com/studio/install#windows). 
+   Eu am lucrat pe versiunea de Windows, dar poate fi instalat pe sistemul de operare pe care îl aveți.
 
-2. **Instalam pachetul de servicii Git**  
+2. **Instalăm pachetul de servicii Git**  
    [Git pentru Windows](https://gitforwindows.org/)  
    GitHub Desktop este necesar pentru a face commit-uri direct din mediul de programare. De asemenea, este un tool necesar framework-ului Flutter.
 
-3. **Instalam SDK de Flutter**  
+3. **Instalăm SDK de Flutter**  
    [Instalare Flutter SDK](https://docs.flutter.dev/get-started/install/windows/mobile?tab=physical)  
-   Eu l-am configurat pentru utilizarea in Android Studio. Pentru aceasta, vom instala plug-inul Flutter: [Flutter Plugin](https://plugins.jetbrains.com/plugin/9212-flutter).
+   Eu l-am configurat pentru utilizarea în Android Studio. Pentru aceasta, vom instala plug-inul Flutter: [Flutter Plugin](https://plugins.jetbrains.com/plugin/9212-flutter).
 
 ## Verificare Instalare 
 
-**Dupa ce am facut toti pasii de mai sus, in PowerShell rulam urmatoarea comanda:**
+**După ce am făcut toți pașii de mai sus, în PowerShell rulăm următoarea comandă:**
 
-```sh
- flutter doctor
+```powershell
+PS C:> flutter doctor
 ```
 
-**Daca am instalat tot corect o sa primim urmatorul text:** 
+**Dacă am instalat tot corect o să primim următorul text:** 
 
-```sh
+```powershell
 Running flutter doctor...
 Doctor summary (to see all details, run flutter doctor -v):
 [✓] Flutter (Channel stable, 3.22.1, on Microsoft Windows 11 [Version 10.0.22621.3155], locale en)
-[✓] Windows version (Installed version of Windows is version 10 or higher)
+[✓] Windows version (Installed version of Windows îs version 10 or higher)
 [✓] Android toolchain - develop for Android devices (Android SDK version 34.0.5)
 [!] Chrome - develop for the web
 [!] Visual Studio - develop Windows apps
@@ -50,22 +50,22 @@ Doctor summary (to see all details, run flutter doctor -v):
 [✓] Network resources
 
 
-! Doctor found issues in 2 categories.
+! Doctor found issues în 2 categories.
 ```
 
-**In cazul in care am primit eroare rulam urmatoarea comanda**
+**În cazul în care am primit eroare rulăm următoarea comandă**
 
 ```powershell
 PS C:> flutter doctor -v
 ```
 
-**Analizam ce mai avem de instalat, instalam dupa care mai rulam din nou comanda** 
+**Analizăm ce mai avem de instalat, instalăm după care mai rulăm din nou comanda** 
 
 ```powershell
- flutter doctor
+PS C:> flutter doctor
 ```
 
-## Pasi de Compilare
+## Pași de Compilare
 
 1. **Clonează repository-ul:**
     ```sh
@@ -82,15 +82,15 @@ PS C:> flutter doctor -v
     ```
 4. **Rulează aplicația:**
     - Conectează un [dispozitiv Android](https://developer.android.com/studio/debug/dev-options)  sau lansează un [Emulator](https://developer.android.com/studio/run/managing-avds).
-Eu am testat tot pe dispozitivul meu fizic Xiaomi Redmi Note 8T ce ruleaza pe Android 11.
-    - In Android Studio, apasa butonul de rulare (Run) sau foloseste comanda:
+Eu am testat tot pe dispozitivul meu fizic Xiaomi Redmi Note 8T ce rulează pe Android 11.
+    - În Android Studio, apasă butonul de rulare (Run) sau folosește comanda:
         ```sh
         flutter run
         ```
 
+
 ## Instalare Dispozitiv
 
-In cazul in care doriti sa instalati aplicatia direct pe dispozitivele persoanle, po puteti face doar daca dispuneti de un dispozitiv Android cu o versiunea mai mare de 9, descarcand [APK-ul](https://uptro29158-my.sharepoint.com/personal/iulian_scoropad_student_upt_ro/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fiulian%5Fscoropad%5Fstudent%5Fupt%5Fro%2FDocuments%2FLicenta%2FReadme%26APK&ga=1)
+În cazul în care doriți să instalați aplicația direct pe dispozitivele persoanle, o puteți face doar dacă dispuneți de un dispozitiv Android cu o versiunea mai mare de 9, descărcând [APK-ul](https://uptro29158-my.sharepoint.com/personal/iulian_scoropad_student_upt_ro/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fiulian%5Fscoropad%5Fstudent%5Fupt%5Fro%2FDocuments%2FLicenta%2FReadme%26APK&ga=1)
 
-
-In cazul in care intimpinati dificultati in instalarea aplicatiei [aici](https://www.digitalcitizen.ro/cum-instalezi-aplicatii-pe-dispozitive-cu-android-folosind-fisiere-apk/#ftoc-cum-instalezi-un-apk-pe-android) aveti informatii despre cum puteti permite instalarea aplicatiilor din surese necunocute.
+În cazul în care întâmpinați dificultăți în instalarea aplicației [aici](https://www.digitalcitizen.ro/cum-instalezi-aplicatii-pe-dispozitive-cu-android-folosind-fisiere-apk/#ftoc-cum-instalezi-un-apk-pe-android) aveți informații despre cum puteți permite instalarea aplicațiilor din surese necunocute.
