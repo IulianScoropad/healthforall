@@ -30,13 +30,13 @@ Codul sursa complet al proiectului este disponibil la urmatoarea adresa:
 
 **Dupa ce am facut toti pasii de mai sus, in PowerShell rulam urmatoarea comanda:**
 
-```powershell
-PS C:> flutter doctor
+```sh
+ flutter doctor
 ```
 
 **Daca am instalat tot corect o sa primim urmatorul text:** 
 
-```powershell
+```sh
 Running flutter doctor...
 Doctor summary (to see all details, run flutter doctor -v):
 [✓] Flutter (Channel stable, 3.22.1, on Microsoft Windows 11 [Version 10.0.22621.3155], locale en)
@@ -62,7 +62,7 @@ PS C:> flutter doctor -v
 **Analizam ce mai avem de instalat, instalam dupa care mai rulam din nou comanda** 
 
 ```powershell
-PS C:> flutter doctor
+ flutter doctor
 ```
 
 ## Pasi de Compilare
